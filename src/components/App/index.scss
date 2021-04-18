@@ -1,0 +1,23 @@
+@import '../../styles/size.scss';
+
+.app-container {
+	position: relative;
+	width: 100%;
+	min-height: 100vh;
+	padding: 40px 60px;
+	overflow-x: hidden;
+
+	&--scroll-disabled {
+		max-height: 100vh;
+		overflow-y: hidden;
+	}
+
+	&__flex-wrapper {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		width: 100%;
+		max-width: $main-wrapper-max-width;
+		margin: 0 auto;
+	}
+}

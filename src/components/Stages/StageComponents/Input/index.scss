@@ -1,0 +1,44 @@
+@import '../../../../styles/colors.scss';
+
+.stage-component {
+	&__input {
+		height: 40px;
+		width: 100%;
+		padding: 10px 17px;
+		font-size: 16px;
+		font-weight: 500;
+		color: $black;
+		border: 1px solid $table-input-color;
+		border-radius: 6px;
+		outline: none;
+
+		&--error {
+			border-color: $red;
+			color: $red;
+
+			&::placeholder {
+				color: $red;
+			}
+		}
+
+		&:focus {
+			border-color: $dark-blue;
+		}
+	}
+
+	&__input-container {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__input-label {
+		margin-bottom: 6px;
+		font-size: 20px;
+	}
+
+	&__input-error {
+		margin-top: 4px;
+		font-size: 14px;
+		color: $red;
+	}
+}

@@ -1,0 +1,89 @@
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+
+.header-container {
+	position: relative;
+	margin-bottom: 50px;
+
+	a {
+		display: inline-block;
+		margin-bottom: 26px;
+		
+		h1 {
+			font-size: 40px;
+			font-weight: 700;
+			text-decoration: none;
+			color: $black;
+
+			&:hover {
+				color: $black;
+			}
+		}
+	}
+
+	&__back-button {
+		position: absolute;
+		top: 12px;
+		left: -14%;
+		display: flex;
+		align-items: center;
+		font-size: 24px;
+		font-weight: 600;
+		color: $dark-blue;
+		transition: color .2s;
+
+		&:hover {
+			color: darken($dark-blue, 15%);
+
+			.back-icon path {
+				stroke: darken($dark-blue, 15%);
+			}
+		}
+
+		&:active {
+			color: darken($dark-blue, 20%);
+
+			.back-icon path {
+				stroke: darken($dark-blue, 20%);
+			}
+		}
+
+		p {
+			display: inline;
+			margin: 0;
+		}
+
+		.back-icon {
+			position: relative;
+			top: 2px;
+			right: 5px;
+
+			path {
+				stroke: $dark-blue;
+				transition: stroke .2s;
+			}
+		}
+
+		@media (max-width: 1440px) {
+			left: -40px;
+
+			p {
+				display: none;
+			}
+
+			.back-icon {
+				width: 30px;
+				height: 30px;
+			}
+		} 
+	}
+
+	&__address-explanation {
+		width: max-content;
+		margin-top: 20px;
+		font-size: 16px;
+		color: $light-blue;
+
+		@include link-effects($light-blue);
+	}
+}
