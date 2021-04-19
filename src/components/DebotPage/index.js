@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { DEngine } from 'src/debot';
 import { useSearchParams } from 'src/helpers';
-import { StagesController } from 'src/components';
+import { StagesController, SigningBox } from 'src/components';
 
 const DebotPage = () => {
 	const searchParams = useSearchParams();
+	const isSigningBoxVisible = useSelector(state => !!state.debot.signingBox);
 	const debotAddress = searchParams.get('debotAddress');
 
 	useEffect(() => {
@@ -25,9 +27,12 @@ const DebotPage = () => {
 	if (!debotAddress)
 		return <Redirect to='/' />
 
+	const pageClassName = `debot-page ${isSigningBoxVisible ? 'debot-page--scroll-disabled' : ''}`;
+
 	return (
-		<div>
+		<div className={pageClassName}>
 			<StagesController />
+			{isSigningBoxVisible && <SigningBox />}
 		</div>
 	)
 }

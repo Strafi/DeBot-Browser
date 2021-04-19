@@ -1,9 +1,11 @@
 import {
 	PUSH_ITEM_TO_STAGE,
+	SET_SIGNING_BOX,
 } from '../actions/debot';
 
 const initialState = {
 	stages: [],
+	signingBox: null,
 }
   
 function reducer(state = initialState, action) {
@@ -22,6 +24,13 @@ function reducer(state = initialState, action) {
 			return {
 				...state,
 				stages,
+			}
+		}
+
+		case SET_SIGNING_BOX: {
+			return {
+				...state,
+				signingBox: payload,
 			}
 		}
 

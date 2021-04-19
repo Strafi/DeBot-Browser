@@ -25,7 +25,7 @@ const Menu = ({ params }) => {
 		return (
 			<div
 				onClick={() => handleSelectItem(item, index)}
-				key={item.functionId}
+				key={`${item.functionId}-${index}`}
 				className='stage-component__menu-item'
 			>
 				{menuName}
