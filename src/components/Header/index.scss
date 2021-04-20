@@ -1,9 +1,11 @@
 @import '../../styles/colors.scss';
 @import '../../styles/mixins.scss';
+@import '../../styles/size.scss';
 
 .header-container {
 	position: relative;
-	margin-bottom: 50px;
+	height: $header-height;
+	margin-bottom: $header-margin;
 
 	a {
 		display: inline-block;

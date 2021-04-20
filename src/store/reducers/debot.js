@@ -1,11 +1,13 @@
 import {
 	PUSH_ITEM_TO_STAGE,
+	POP_ITEM_FROM_STAGE,
+	CLEAR_STAGE,
 	SET_SIGNING_BOX,
 	SET_APPROVE_WINDOW,
 } from '../actions/debot';
 
 const initialState = {
-	stages: [],
+	stage: [],
 	signingBox: null,
 	approveWindow: null,
 }
@@ -15,17 +17,29 @@ function reducer(state = initialState, action) {
 
 	switch (type) {
 		case PUSH_ITEM_TO_STAGE: {
-			const stages = [...state.stages];
-
-			if (!stages.length) {
-				stages.push([payload]);
-			} else {
-				stages[stages.length - 1].push(payload);
-			}
+			const stage = [...state.stage, payload];
 
 			return {
 				...state,
-				stages,
+				stage,
+			}
+		}
+
+		case POP_ITEM_FROM_STAGE: {
+			const stage = [...state.stage];
+
+			stage.pop();
+
+			return {
+				...state,
+				stage,
+			}
+		}
+
+		case CLEAR_STAGE: {
+			return {
+				...state,
+				stage: [],
 			}
 		}
 

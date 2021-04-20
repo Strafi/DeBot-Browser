@@ -1,5 +1,6 @@
 import store from 'src/store';
 import tonClient from 'src/tonClient';
+import { DEngine } from 'src/debot';
 import { DEBOT_WC } from 'src/constants';
 import { setSigningBox, setApproveWindow } from 'src/store/actions/debot';
 import InterfacesController from './interfaces';
@@ -65,20 +66,25 @@ class DebotBrowser {
 	};
 
 	async send(params) {
-		const parsedMessage = await tonClient.boc.parse_message({ boc: params.message })
+		try {
+			const parsedMessage = await tonClient.boc.parse_message({ boc: params.message })
 
-		const { dst, src, dst_workchain_id } = parsedMessage.parsed;
-		const [, interfaceId] = dst.split(':');
-
-		if (dst_workchain_id === DEBOT_WC) {
-			InterfacesController.delegateToInterface(interfaceId, {
-				debotAddress: src,
-				...params,
-			});
-		} else {
-			console.log('call other debot', parsedMessage, params);
-			// call other debot
-		}
+			const { dst, src, dst_workchain_id } = parsedMessage.parsed;
+			const [, interfaceId] = dst.split(':');
+	
+			if (dst_workchain_id === DEBOT_WC) {
+				InterfacesController.delegateToInterface(interfaceId, {
+					debotAddress: src,
+					...params,
+				});
+			} else {
+				console.log('Call other debot', parsedMessage, params);
+				
+				await DEngine.runDebot(dst);
+			}
+		} catch(err) {
+			console.error(err);
+		}	
 	};
 
 	async approve(params) {

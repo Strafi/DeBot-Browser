@@ -1,0 +1,12 @@
+@import '../../styles/size.scss';
+
+.debot-page {
+	&--scroll-disabled {
+		max-height: 100vh;
+		overflow-y: hidden;
+	}
+
+	&__controls {
+		height: $debot-page-controls-height;
+	}
+}

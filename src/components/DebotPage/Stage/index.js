@@ -1,5 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
+import { connect } from 'react-redux';
 import { COMPONENTS_BINDINGS } from 'src/constants';
+import { isWindows } from 'src/helpers';
+import { Loader } from 'src/components';
 import {
 	Text,
 	Input,
@@ -11,6 +14,8 @@ import {
 import './index.scss';
 
 class Stage extends Component {
+	stageRef = createRef(null);
+
 	stageComponents = {
 		[COMPONENTS_BINDINGS.INPUT]: Input,
 		[COMPONENTS_BINDINGS.TEXTAREA]: Textarea,
@@ -30,15 +35,34 @@ class Stage extends Component {
 		});
 	}
 
+	componentDidUpdate(prevProps) {
+		if (prevProps.stage.length !== this.props.stage.length) {
+			if (this.stageRef?.current)
+				this.stageRef.current.scrollTop = this.stageRef.current.scrollHeight;
+		}
+	}
+
 	render() {
+		const { stage } = this.props;
+
+		if (!stage.length) {
+			return <Loader />
+		}
+
 		const stageComponents = this.formStageComponents();
 
+		const stageClassName = `stage ${isWindows() ? 'with-custom-scrollbar' : ''}`;
+
 		return (
-			<div className="stage__container">
-				{stageComponents}
+			<div ref={this.stageRef} className={stageClassName}>
+				<div className='stage__container'>
+					{stageComponents}
+				</div>
 			</div>
 		)
 	}
 }
 
-export default Stage;
+const mapStateToProps = ({ debot: { stage } }) => ({ stage });
+
+export default connect(mapStateToProps)(Stage);

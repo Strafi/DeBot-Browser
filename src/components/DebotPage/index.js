@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { DEngine } from 'src/debot';
 import { useSearchParams } from 'src/helpers';
-import { StagesController, SigningBox, ApproveWindow } from 'src/components';
+import { clearStage } from 'src/store/actions/debot';
+import { SigningBox, ApproveWindow } from 'src/components';
+import Stage from './Stage';
+import './index.scss';
 
 const DebotPage = () => {
+	const dispatch = useDispatch();
 	const searchParams = useSearchParams();
 	const isSigningBoxVisible = useSelector(state => !!state.debot.signingBox);
 	const isApproveWindowVisible = useSelector(state => !!state.debot.approveWindow);
@@ -23,16 +27,24 @@ const DebotPage = () => {
 		}
 		
 		asyncEffect();
-	}, [debotAddress]);
+
+		return () => {
+			dispatch(clearStage());
+		}
+	}, [debotAddress, dispatch]);
 
 	if (!debotAddress)
 		return <Redirect to='/' />
 
-	const pageClassName = `debot-page ${isSigningBoxVisible ? 'debot-page--scroll-disabled' : ''}`;
+	const isScrollDisabled = isSigningBoxVisible || isApproveWindowVisible;
+	const pageClassName = `debot-page ${isScrollDisabled ? 'debot-page--scroll-disabled' : ''}`;
 
 	return (
 		<div className={pageClassName}>
-			<StagesController />
+			<div className='debot-page__controls'>
+				
+			</div>
+			<Stage />
 			{isSigningBoxVisible && <SigningBox />}
 			{isApproveWindowVisible && <ApproveWindow />}
 		</div>

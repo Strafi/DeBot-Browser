@@ -1,0 +1,13 @@
+@import '../../../styles/size.scss';
+
+.stage {
+	width: 100%;
+	max-width: $stage-max-width;
+	height: $stage-height;
+	margin: 0 auto;
+	overflow-y: auto;
+
+	&__container {
+		padding-right: 8px;
+	}
+}

@@ -4,13 +4,8 @@
 	position: relative;
 	width: 100%;
 	min-height: 100vh;
-	padding: 40px 60px;
+	padding: $app-top-padding 60px;
 	overflow-x: hidden;
-
-	&--scroll-disabled {
-		max-height: 100vh;
-		overflow-y: hidden;
-	}
 
 	&__flex-wrapper {
 		display: flex;

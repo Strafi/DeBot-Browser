@@ -1,1 +1,8 @@
 $main-wrapper-max-width: 1050px;
+$stage-max-width: 850px;
+
+$app-top-padding: 40px;
+$header-height: 120px;
+$header-margin: 50px;
+$debot-page-controls-height: 40px;
+$stage-height: calc(100vh - #{$app-top-padding} - #{$app-top-padding} - #{$header-height} - #{$header-margin} - #{$debot-page-controls-height});

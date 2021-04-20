@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { ConfirmInput } from 'src/components/Stages/StageComponents';
+import { ConfirmInput } from 'src/components/DebotPage/Stage/StageComponents';
 import './index.scss';
 
 const convertFromNano = value => value / 1000000000;
