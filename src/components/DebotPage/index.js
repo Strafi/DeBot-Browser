@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { DEngine } from 'src/debot';
@@ -11,6 +11,7 @@ import './index.scss';
 const DebotPage = () => {
 	const dispatch = useDispatch();
 	const searchParams = useSearchParams();
+	const [isDebotError, setIsDebotError] = useState(false);
 	const isSigningBoxVisible = useSelector(state => !!state.debot.signingBox);
 	const isApproveWindowVisible = useSelector(state => !!state.debot.approveWindow);
 	const debotAddress = searchParams.get('debotAddress');
@@ -21,6 +22,7 @@ const DebotPage = () => {
 				try {
 					await DEngine.runDebot(debotAddress);
 				} catch (err) {
+					setIsDebotError(true);
 					console.error('Error while running debot: ', err);
 				}
 			}
@@ -48,7 +50,7 @@ const DebotPage = () => {
 					Clear History
 				</div>
 			</div>
-			<Stage />
+			<Stage isDebotError={isDebotError} />
 			{isSigningBoxVisible && <SigningBox />}
 			{isApproveWindowVisible && <ApproveWindow />}
 		</div>

@@ -17,6 +17,7 @@ const SearchBar = () => {
 
 		if (isValidAddress) {
 			const debotUrl = createDebotUrl(inputValue);
+			dispatch(filterDebotsListByName(''));
 
 			return history.push(debotUrl);
 		}

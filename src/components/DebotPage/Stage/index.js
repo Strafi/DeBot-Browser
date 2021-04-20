@@ -43,10 +43,10 @@ class Stage extends Component {
 	}
 
 	render() {
-		const { stage } = this.props;
+		const { stage, isDebotError } = this.props;
 
 		if (!stage.length) {
-			return <Loader />
+			return <Loader isFailed={isDebotError} />
 		}
 
 		const stageComponents = this.formStageComponents();
