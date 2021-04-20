@@ -1,70 +1,53 @@
 /* eslint-disable camelcase */
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { createDebotUrl, checkIsValidAddress } from 'src/helpers';
+import { filterDebotsListByName } from 'src/store/actions/debot';
 import { LensIcon } from 'src/components/icons';
 import './index.scss';
 
-class SearchBar extends Component {
-	state = {
-		inputValue: '',
-		isInvalidAddress: false,
+const SearchBar = () => {
+	const history = useHistory();
+	const dispatch = useDispatch();
+	const [inputValue, setInputValue] = useState('');
+
+	const searchDebot = async () => {
+		const isValidAddress = await checkIsValidAddress(inputValue);
+
+		if (isValidAddress) {
+			const debotUrl = createDebotUrl(inputValue);
+
+			return history.push(debotUrl);
+		}
+
+		dispatch(filterDebotsListByName(inputValue));
 	}
 
-	searchDebot = async () => {
-		const { inputValue: debotAddress } = this.state;
-		const { history } = this.props;
-
-		if (!debotAddress)
-			return;
-
-		const isValidAddress = await checkIsValidAddress(debotAddress);
-
-		if (!isValidAddress)
-			return this.setState({ isInvalidAddress: true });
-
-		const debotUrl = createDebotUrl(debotAddress);
-
-		return history.push(debotUrl);
-	}
-
-	handleInputChange = event => {
-		this.setState({
-			inputValue: event.target.value,
-			isInvalidAddress: false,
-		});
-	}
-
-	handleKeyPress = event => {
+	const handleKeyPress = event => {
 		const { shiftKey, key, altKey } = event;
 		const isEnter = key === 'Enter';
 		const shouldSearch = isEnter && !shiftKey && !altKey;
 
 		if (shouldSearch) {
 			event.preventDefault();
-			this.searchDebot();
+			searchDebot();
 		}
 	}
 
-	render() {
-		const { inputValue, isInvalidAddress } = this.state;
-
-		const searchBarClassName = `search-bar-container ${isInvalidAddress ? 'search-bar-container--invalid' : ''}`;
-
-		return (
-			<div className={searchBarClassName}>
-				<input
-					className='search-bar-container__input'
-					type='text'
-					placeholder='Enter debot address'
-					value={inputValue}
-					onChange={this.handleInputChange}
-					onKeyPress={this.handleKeyPress}
-				/>
-				<LensIcon onClick={this.searchDebot} />
-			</div>
-		);
-	}
+	return (
+		<div className='search-bar-container'>
+			<input
+				className='search-bar-container__input'
+				type='text'
+				placeholder='Enter debot address'
+				value={inputValue}
+				onChange={(e) => setInputValue(e.target.value)}
+				onKeyPress={handleKeyPress}
+			/>
+			<LensIcon onClick={searchDebot} />
+		</div>
+	);
 }
 
-export default withRouter(SearchBar);
+export default SearchBar;

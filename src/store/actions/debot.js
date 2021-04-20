@@ -2,6 +2,7 @@ export const PUSH_ITEM_TO_STAGE = 'debot/PUSH_ITEM_TO_STAGE';
 export const CLEAR_STAGE = 'debot/CLEAR_STAGE';
 export const SET_SIGNING_BOX = 'debot/SET_SIGNING_BOX';
 export const SET_APPROVE_WINDOW = 'debot/SET_APPROVE_WINDOW';
+export const FILTER_DEBOTS_LIST_BY_NAME = 'debot/FILTER_DEBOTS_LIST_BY_NAME';
 
 export const pushItemToStage = item => dispatch => {
 	dispatch({
@@ -25,5 +26,12 @@ export const setApproveWindow = approveWindowInfo => dispatch => {
 	dispatch({
 		type: SET_APPROVE_WINDOW,
 		payload: approveWindowInfo,
+	})
+}
+
+export const filterDebotsListByName = filterValue => dispatch => {
+	dispatch({
+		type: FILTER_DEBOTS_LIST_BY_NAME,
+		payload: filterValue,
 	})
 }
