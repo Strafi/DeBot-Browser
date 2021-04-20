@@ -1,6 +1,5 @@
 import {
 	PUSH_ITEM_TO_STAGE,
-	POP_ITEM_FROM_STAGE,
 	CLEAR_STAGE,
 	SET_SIGNING_BOX,
 	SET_APPROVE_WINDOW,
@@ -18,17 +17,6 @@ function reducer(state = initialState, action) {
 	switch (type) {
 		case PUSH_ITEM_TO_STAGE: {
 			const stage = [...state.stage, payload];
-
-			return {
-				...state,
-				stage,
-			}
-		}
-
-		case POP_ITEM_FROM_STAGE: {
-			const stage = [...state.stage];
-
-			stage.pop();
 
 			return {
 				...state,

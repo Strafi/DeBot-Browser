@@ -1,4 +1,5 @@
 @import '../../styles/size.scss';
+@import '../../styles/colors.scss';
 
 .debot-page {
 	&--scroll-disabled {
@@ -7,6 +8,30 @@
 	}
 
 	&__controls {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
 		height: $debot-page-controls-height;
+	}
+
+	&__controls-item {
+		margin-right: 20px;
+		font-weight: 600;
+		font-size: 18px;
+		color: $blue;
+		cursor: pointer;
+		transition: color .2s;
+
+		&:hover {
+			color: $light-blue;
+		}
+
+		&:active {
+			color: $dark-blue;
+		}
+
+		&:last-child {
+			margin-right: 0;
+		}
 	}
 }

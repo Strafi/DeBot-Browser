@@ -42,7 +42,11 @@ const DebotPage = () => {
 	return (
 		<div className={pageClassName}>
 			<div className='debot-page__controls'>
-				
+				<div
+					className='debot-page__controls-item'
+				>
+					Clear History
+				</div>
 			</div>
 			<Stage />
 			{isSigningBoxVisible && <SigningBox />}
