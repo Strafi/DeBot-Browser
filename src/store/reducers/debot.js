@@ -1,11 +1,13 @@
 import {
 	PUSH_ITEM_TO_STAGE,
 	SET_SIGNING_BOX,
+	SET_APPROVE_WINDOW,
 } from '../actions/debot';
 
 const initialState = {
 	stages: [],
 	signingBox: null,
+	approveWindow: null,
 }
   
 function reducer(state = initialState, action) {
@@ -31,6 +33,13 @@ function reducer(state = initialState, action) {
 			return {
 				...state,
 				signingBox: payload,
+			}
+		}
+
+		case SET_APPROVE_WINDOW: {
+			return {
+				...state,
+				approveWindow: payload,
 			}
 		}
 

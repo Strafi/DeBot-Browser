@@ -5,4 +5,5 @@ export { default as DebotsList } from './DebotsList';
 export { default as DebotPage } from './DebotPage';
 export { default as StagesController } from './Stages';
 export { default as SigningBox } from './SigningBox';
+export { default as ApproveWindow } from './ApproveWindow';
 export { default as Loader } from './Loader';

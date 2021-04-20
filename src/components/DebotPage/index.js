@@ -3,11 +3,12 @@ import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { DEngine } from 'src/debot';
 import { useSearchParams } from 'src/helpers';
-import { StagesController, SigningBox } from 'src/components';
+import { StagesController, SigningBox, ApproveWindow } from 'src/components';
 
 const DebotPage = () => {
 	const searchParams = useSearchParams();
 	const isSigningBoxVisible = useSelector(state => !!state.debot.signingBox);
+	const isApproveWindowVisible = useSelector(state => !!state.debot.approveWindow);
 	const debotAddress = searchParams.get('debotAddress');
 
 	useEffect(() => {
@@ -33,6 +34,7 @@ const DebotPage = () => {
 		<div className={pageClassName}>
 			<StagesController />
 			{isSigningBoxVisible && <SigningBox />}
+			{isApproveWindowVisible && <ApproveWindow />}
 		</div>
 	)
 }

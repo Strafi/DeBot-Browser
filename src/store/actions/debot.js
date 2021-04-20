@@ -1,5 +1,6 @@
-export const PUSH_ITEM_TO_STAGE = 'contest/PUSH_ITEM_TO_STAGE';
-export const SET_SIGNING_BOX = 'contest/SET_SIGNING_BOX';
+export const PUSH_ITEM_TO_STAGE = 'debot/PUSH_ITEM_TO_STAGE';
+export const SET_SIGNING_BOX = 'debot/SET_SIGNING_BOX';
+export const SET_APPROVE_WINDOW = 'debot/SET_APPROVE_WINDOW';
 
 export const pushItemToStage = item => dispatch => {
 	dispatch({
@@ -12,5 +13,12 @@ export const setSigningBox = signingBoxInfo => dispatch => {
 	dispatch({
 		type: SET_SIGNING_BOX,
 		payload: signingBoxInfo,
+	})
+}
+
+export const setApproveWindow = approveWindowInfo => dispatch => {
+	dispatch({
+		type: SET_APPROVE_WINDOW,
+		payload: approveWindowInfo,
 	})
 }

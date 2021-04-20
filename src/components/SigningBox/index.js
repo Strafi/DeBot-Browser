@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setSigningBox } from 'src/store/actions/debot';
+import { useSelector } from 'react-redux';
 import { genKeyPairFromMnemonic } from 'src/helpers';
-import { CancelIcon } from 'src/components/icons';
 import './index.scss';
 
 const SigningBox = () => {
@@ -11,9 +9,6 @@ const SigningBox = () => {
 	const [isDropable, setIsDropable] = useState(false);
 	const [isUploadError, setIsUploadError] = useState(false);
 	const signingBox = useSelector(state => state.debot.signingBox);
-	const dispatch = useDispatch();
-
-	const closeSigningBox = () => dispatch(setSigningBox(null));
 
 	const handleChangeInput = e => {
 		setInputValue(e.target.value);
@@ -86,7 +81,6 @@ const SigningBox = () => {
 	return (
 		<div className='signing-box'>
 			<div className='signing-box__container'>
-				<CancelIcon onClick={closeSigningBox} />
 				<div className='signing-box__header'>
 					Signing Box
 				</div>
