@@ -6,6 +6,7 @@ import { Loader } from 'src/components';
 import {
 	Text,
 	Input,
+	AddressInput,
 	Textarea,
 	AmountInput,
 	ConfirmInput,
@@ -21,6 +22,7 @@ class Stage extends Component {
 		[COMPONENTS_BINDINGS.TEXTAREA]: Textarea,
 		[COMPONENTS_BINDINGS.AMOUNT_INPUT]: AmountInput,
 		[COMPONENTS_BINDINGS.CONFIRM_INPUT]: ConfirmInput,
+		[COMPONENTS_BINDINGS.ADDRESS_INPUT]: AddressInput,
 		[COMPONENTS_BINDINGS.TEXT]: Text,
 		[COMPONENTS_BINDINGS.MENU]: Menu,
 	}
@@ -38,7 +40,7 @@ class Stage extends Component {
 	componentDidUpdate(prevProps) {
 		if (prevProps.stage.length !== this.props.stage.length) {
 			if (this.stageRef?.current)
-				this.stageRef.current.scrollTop = this.stageRef.current.scrollHeight;
+				setTimeout(() => this.stageRef.current.scrollTop = this.stageRef.current.scrollHeight, 0);
 		}
 	}
 

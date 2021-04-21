@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { ConfirmInput } from 'src/components/DebotPage/Stage/StageComponents';
+import { createExplorerUrl } from 'src/helpers';
 import './index.scss';
 
 const convertFromNano = value => value / 1000000000;
@@ -28,7 +29,7 @@ const ApproveWindow = () => {
 							Account:
 						</div>
 						<div className='approve-window__details-col'>
-							{dst}
+							<a href={createExplorerUrl(dst)} target="_blank" rel="noreferrer">{dst}</a>
 						</div>
 					</div>
 					<div className='approve-window__details-row'>
@@ -69,7 +70,7 @@ const ApproveWindow = () => {
 						{out.map((spending, index) => (
 							<div key={`${spending}-${index}`} className='approve-window__transfers-row'>
 								<div className='approve-window__transfers-col'>
-									{spending.recipient}
+									<a href={createExplorerUrl(spending.recipient)} target="_blank" rel="noreferrer">{spending.recipient}</a>
 								</div>
 								<div className='approve-window__transfers-col'>
 									{convertFromNano(spending.amount)} tokens

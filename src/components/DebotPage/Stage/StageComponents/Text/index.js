@@ -5,7 +5,7 @@ import './index.scss';
 
 const Text = ({ params }) => {
 	const debotAddress = useDebotAddress();
-	const { text, functionId, interfaceAddress } = params;
+	const { text, functionId, interfaceAddress, isError } = params;
 
 	useEffect(() => {
 		const runDebotFunction = async () => {
@@ -21,8 +21,10 @@ const Text = ({ params }) => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	const textClassName = `stage-component__text ${isError ? 'stage-component__text--error' : ''}`;
+
 	return (
-		<div className='stage-component__text'>
+		<div className={textClassName}>
 			{text}
 		</div>
 	)

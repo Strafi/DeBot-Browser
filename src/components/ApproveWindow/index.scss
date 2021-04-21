@@ -83,6 +83,18 @@
 				padding: 4px 6px 4px 7px;
 				border-right: 1px dashed $grey;
 			}
+
+			a {
+				color: $blue;
+
+				&:hover {
+					color: $light-blue;
+				}
+		
+				&:active {
+					color: $dark-blue;
+				}
+			}
 		}
 
 		&-description {
@@ -127,6 +139,18 @@
 			&--title {
 				text-align: center;
 				font-weight: 600;
+			}
+
+			a {
+				color: $blue;
+
+				&:hover {
+					color: $light-blue;
+				}
+		
+				&:active {
+					color: $dark-blue;
+				}
 			}
 		}
 

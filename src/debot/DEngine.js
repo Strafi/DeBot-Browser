@@ -1,6 +1,9 @@
+import store from 'src/store';
 import { DebotModule } from '@tonclient/core';
 import tonClient from 'src/tonClient';
 import { formDebotFunctionFromId } from 'src/helpers';
+import { COMPONENTS_BINDINGS } from 'src/constants';
+import { pushItemToStage } from 'src/store/actions/debot';
 import DebotBrowser from './DebotBrowser';
 
 class DEngine {
@@ -46,7 +49,19 @@ class DEngine {
 			value: '1000000000000000',
 		});
 
-		return this.debotModule.send({ debot_handle, message: encodedMessage.message });
+		try {
+			const sendRes = await this.debotModule.send({ debot_handle, message: encodedMessage.message });
+
+			return sendRes;
+		} catch(err) {
+			console.log(err);
+
+			store.dispatch(pushItemToStage({
+				text: err.message,
+				component: COMPONENTS_BINDINGS.TEXT,
+				isError: true,
+			}));
+		}
 	}
 }
 

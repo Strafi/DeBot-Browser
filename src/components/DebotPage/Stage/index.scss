@@ -6,6 +6,7 @@
 	height: $stage-height;
 	margin: 0 auto;
 	overflow-y: auto;
+	scroll-behavior: smooth;
 
 	&__container {
 		padding-right: 8px;

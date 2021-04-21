@@ -8,8 +8,11 @@ const COMPONENTS_BINDINGS = {
 	TEXTAREA: 'Textarea',
 	AMOUNT_INPUT: 'AmountInput',
 	CONFIRM_INPUT: 'ConfirmInput',
+	ADDRESS_INPUT: 'AddressInput',
 	MENU: 'Menu',
 }
+
+const EXPLORER_BASE_URL = 'https://ton.live/accounts/accountDetails?id=';
 
 const DEBOT_ADDRESS_SEARCH_PARAM = 'debotAddress';
 
@@ -18,6 +21,7 @@ const MNEMONIC_WORD_COUNT = 12;
 const DERIVATION_PATH = "m/44'/396'/0'/0/0";
 
 module.exports = {
+	EXPLORER_BASE_URL,
 	DB_CONTENT_TYPES,
 	COMPONENTS_BINDINGS,
 	DEBOT_ADDRESS_SEARCH_PARAM,

@@ -3,7 +3,14 @@ import { useDebotAddress, encodeString } from 'src/helpers';
 import { DEngine } from 'src/debot';
 import './index.scss';
 
-const Input = ({ params, type = 'text', isMultiline = false }) => {
+const Input = ({
+	params,
+	type = 'text',
+	isMultiline = false,
+	customCallback,
+	customErrorText,
+	setCustomErrorText,
+}) => {
 	const debotAddress = useDebotAddress();
 	const [inputValue, setInputValue] = useState('');
 	const [errorText, setErrorText] = useState('');
@@ -17,17 +24,23 @@ const Input = ({ params, type = 'text', isMultiline = false }) => {
 	const handleInputChange = event => {
 		setInputValue(event.target.value);
 		setErrorText('');
+
+		if (setCustomErrorText)
+			setCustomErrorText('');
 	}
 
 	const handleKeyPress = async event => {
 		const { shiftKey, key, altKey } = event;
 		const isEnter = key === 'Enter';
-		const shouldTriggerFunction = isEnter && !shiftKey && !altKey && !errorText && inputValue;
+		const shouldTriggerFunction = isEnter && !shiftKey && !altKey && !errorText && inputValue && !customErrorText;
 
 		if (shouldTriggerFunction) {
 			event.preventDefault();
 
 			try {
+				if (customCallback)
+					return customCallback(inputValue);
+
 				await DEngine.callDebotFunction(debotAddress, interfaceAddress, functionId, { value: encodeString(inputValue) });
 			} catch(err) {
 				setErrorText(err.message);
@@ -35,11 +48,11 @@ const Input = ({ params, type = 'text', isMultiline = false }) => {
 		}
 	}
 
-	const inputClassName = `stage-component__input ${errorText ? 'stage-component__input--error' : ''}`;
+	const inputClassName = `stage-component__input ${errorText || customErrorText ? 'stage-component__input--error' : ''}`;
 
 	return (
 		<div className='stage-component__input-container'>
-			<span className='stage-component__input-label'>{text}</span>
+			{!!text && <span className='stage-component__input-label'>{text}</span>}
 			{isMultiline
 				? <textarea
 					className={inputClassName}
@@ -60,7 +73,8 @@ const Input = ({ params, type = 'text', isMultiline = false }) => {
 					ref={inputRef}
 				/>
 			}
-			{errorText && <span className='stage-component__input-error'>{errorText}</span>}
+			{!!errorText && <span className='stage-component__input-error'>{errorText}</span>}
+			{!!customErrorText && <span className='stage-component__input-error'>{customErrorText}</span>}
 		</div>
 	)
 };

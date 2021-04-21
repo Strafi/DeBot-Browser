@@ -2,6 +2,7 @@ import Terminal from './terminal';
 import Menu from './menu';
 import AmountInput from './amount_input';
 import ConfirmInput from './confirm_input';
+import AddressInput from './address_input';
 
 class InterfacesController {
 	constructor() {
@@ -9,12 +10,14 @@ class InterfacesController {
 		const menu = new Menu();
 		const amountInput = new AmountInput();
 		const confirmInput = new ConfirmInput();
+		const addressInput = new AddressInput();
 
 		this.state = new Map([
 			[terminal.id, terminal],
 			[menu.id, menu],
 			[amountInput.id, amountInput],
 			[confirmInput.id, confirmInput],
+			[addressInput.id, addressInput],
 		]);
 	}
 
