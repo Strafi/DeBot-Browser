@@ -11,4 +11,12 @@
 	&__container {
 		padding-right: 8px;
 	}
+
+	@media (max-width: 644px) {
+		height: calc(#{$stage-height} - 56px);
+	}
+
+	@media (max-width: 437px) {
+		height: calc(#{$stage-height} - 113px);
+	}
 }

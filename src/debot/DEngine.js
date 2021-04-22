@@ -3,7 +3,7 @@ import { DebotModule } from '@tonclient/core';
 import tonClient from 'src/tonClient';
 import { formDebotFunctionFromId } from 'src/helpers';
 import { COMPONENTS_BINDINGS } from 'src/constants';
-import { pushItemToStage } from 'src/store/actions/debot';
+import { pushItemToStage, clearStage, setApproveWindow, setSigningBox } from 'src/store/actions/debot';
 import DebotBrowser from './DebotBrowser';
 
 class DEngine {
@@ -62,6 +62,14 @@ class DEngine {
 				isError: true,
 			}));
 		}
+	}
+
+	async reloadDebot(address) {
+		store.dispatch(clearStage());
+		store.dispatch(setApproveWindow(null));
+		store.dispatch(setSigningBox(null));
+
+		return this.runDebot(address);
 	}
 }
 

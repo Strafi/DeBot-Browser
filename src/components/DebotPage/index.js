@@ -38,6 +38,15 @@ const DebotPage = () => {
 	if (!debotAddress)
 		return <Redirect to='/' />
 
+	const restartDebot = async () => {
+		try {
+			await DEngine.reloadDebot(debotAddress);
+		} catch (err) {
+			setIsDebotError(true);
+			console.error('Error while running debot: ', err);
+		}
+	}
+
 	const isScrollDisabled = isSigningBoxVisible || isApproveWindowVisible;
 	const pageClassName = `debot-page ${isScrollDisabled ? 'debot-page--scroll-disabled' : ''}`;
 
@@ -46,8 +55,9 @@ const DebotPage = () => {
 			<div className='debot-page__controls'>
 				<div
 					className='debot-page__controls-item'
+					onClick={restartDebot}
 				>
-					Clear History
+					Restart DeBot
 				</div>
 			</div>
 			<Stage isDebotError={isDebotError} />
