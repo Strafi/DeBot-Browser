@@ -3,6 +3,9 @@ import Menu from './menu';
 import AmountInput from './amount_input';
 import ConfirmInput from './confirm_input';
 import AddressInput from './address_input';
+import NumberInput from './number_input';
+import Echo from './echo';
+import Stdout from './stdout';
 
 class InterfacesController {
 	constructor() {
@@ -11,6 +14,9 @@ class InterfacesController {
 		const amountInput = new AmountInput();
 		const confirmInput = new ConfirmInput();
 		const addressInput = new AddressInput();
+		const numberInput = new NumberInput();
+		const echo = new Echo();
+		const stdout = new Stdout();
 
 		this.state = new Map([
 			[terminal.id, terminal],
@@ -18,6 +24,9 @@ class InterfacesController {
 			[amountInput.id, amountInput],
 			[confirmInput.id, confirmInput],
 			[addressInput.id, addressInput],
+			[numberInput.id, numberInput],
+			[echo.id, echo],
+			[stdout.id, stdout],
 		]);
 	}
 

@@ -28,14 +28,19 @@ class DEngine {
 	async callDebotFunction(debotAddress, interfaceAddress, functionId, input) {
 		const debotParams = this.storage.get(debotAddress);
 		const { debot_handle, debot_abi } = debotParams;
-		const functionName = formDebotFunctionFromId(functionId);
 
-		const call_set = {
-			function_name: functionName,
-		}
+		let call_set;
 
-		if (input) {
-			call_set.input = input;
+		if (functionId) {
+			const functionName = formDebotFunctionFromId(functionId);
+
+			call_set = {
+				function_name: functionName,
+			}
+
+			if (input) {
+				call_set.input = input;
+			}
 		}
 
 		const encodedMessage = await tonClient.abi.encode_internal_message({

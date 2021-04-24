@@ -10,6 +10,7 @@ const COMPONENTS_BINDINGS = {
 	CONFIRM_INPUT: 'ConfirmInput',
 	ADDRESS_INPUT: 'AddressInput',
 	MENU: 'Menu',
+	STDOUT: 'Stdout',
 }
 
 const EXPLORER_BASE_URL = 'https://ton.live/accounts/accountDetails?id=';

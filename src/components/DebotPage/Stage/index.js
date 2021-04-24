@@ -5,6 +5,7 @@ import { isWindows } from 'src/helpers';
 import { Loader } from 'src/components';
 import {
 	Text,
+	Stdout,
 	Input,
 	AddressInput,
 	Textarea,
@@ -24,6 +25,7 @@ class Stage extends Component {
 		[COMPONENTS_BINDINGS.CONFIRM_INPUT]: ConfirmInput,
 		[COMPONENTS_BINDINGS.ADDRESS_INPUT]: AddressInput,
 		[COMPONENTS_BINDINGS.TEXT]: Text,
+		[COMPONENTS_BINDINGS.STDOUT]: Stdout,
 		[COMPONENTS_BINDINGS.MENU]: Menu,
 	}
 
