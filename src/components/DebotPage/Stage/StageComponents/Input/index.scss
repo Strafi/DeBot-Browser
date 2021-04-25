@@ -52,4 +52,10 @@
 		color: $red;
 		word-break: break-word;
 	}
+
+	&__input-description {
+		margin-bottom: 6px;
+		font-size: 18px;
+		word-break: break-word;
+	}
 }

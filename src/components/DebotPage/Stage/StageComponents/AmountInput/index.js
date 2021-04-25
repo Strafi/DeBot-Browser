@@ -18,17 +18,34 @@ function formStepFromDecimals(decimals) {
 	return resultString;
 }
 
-const AmountInput = ({ params }) => {
+function formDescription(config) {
+	if (config.min && config.max)
+		return `Input value must be greater than ${config.min} and less than (or equal) ${config.max}`;
+	else if (config.min)
+		return `Input value must be greater than ${config.min}`;
+	else if (config.max)
+		return `Input value must be less than (or equal) ${config.max}`;
+	else
+		return false;
+}
+
+const AmountInput = ({
+	params,
+	customCallback,
+	customErrorText,
+	setCustomErrorText,
+}) => {
 	const debotAddress = useDebotAddress();
 	const [inputValue, setInputValue] = useState('');
 	const [errorText, setErrorText] = useState('');
 	const inputRef = useRef(null);
-	const { text, functionId, interfaceAddress, config } = params;
+	const { text, functionId, interfaceAddress, config = {} } = params;
 	const inputConfig = {
 		min: config.min,
 		max: config.max,
 		step: formStepFromDecimals(config.decimals),
 	};
+	const description = formDescription(config);
 
 	useEffect(() => {
 		inputRef?.current?.focus();
@@ -41,27 +58,41 @@ const AmountInput = ({ params }) => {
 			setInputValue(event.target.value);
 			setErrorText('');
 
+			if (setCustomErrorText)
+				setCustomErrorText('');
+
 			return;
 		}
 
 		if (!config.decimals || config.decimals === "0") {
-			if (value.includes('.'))
-				return setErrorText('This input does not support decimals');
+			if (value.includes('.')) {
+				setErrorText('This input does not support decimals');
+
+				return;
+			}
 		} else {
 			const [, decimalsString] = value.split('.');
 
 			if (decimalsString && parseInt(config.decimals) < decimalsString.length) {
-				return setErrorText('Too many decimals');
+				setErrorText('Too many decimals');
+
+				return;
 			}
 		}
 
 		const floatValue = parseFloat(value);
+		const isOutOfRange = (config.max && floatValue > config.max) || (config.min && floatValue < config.min);
 
-		if (value !== '' && (value.includes('e') || floatValue > config.max || floatValue < config.min)) {
-			setErrorText(`Input value must be greater than ${config.min} and less than (or equal) ${config.max}`);
+		if (value.includes('e')) {
+			setErrorText('Input includes not valid characters');
+		} else if (isOutOfRange) {
+			setErrorText(description);
 		} else {
 			setInputValue(event.target.value);
 			setErrorText('');
+
+			if (setCustomErrorText)
+				setCustomErrorText('');
 		}
 	}
 
@@ -74,6 +105,9 @@ const AmountInput = ({ params }) => {
 			event.preventDefault();
 
 			try {
+				if (customCallback)
+					return customCallback(inputValue);
+
 				await DEngine.callDebotFunction(debotAddress, interfaceAddress, functionId, { value: encodeString(inputValue) });
 			} catch(err) {
 				setErrorText(err.message);
@@ -85,7 +119,8 @@ const AmountInput = ({ params }) => {
 
 	return (
 		<div className='stage-component__input-container'>
-			<span className='stage-component__input-label'>{text}</span>
+			{!!text && <span className='stage-component__input-label'>{text}</span>}
+			{!!description && <div className='stage-component__input-description'>{description}</div>}
 			<input
 				className={inputClassName}
 				type='number'
@@ -97,6 +132,7 @@ const AmountInput = ({ params }) => {
 				{...inputConfig}
 			/>
 			{errorText && <span className='stage-component__input-error'>{errorText}</span>}
+			{!!customErrorText && <span className='stage-component__input-error'>{customErrorText}</span>}
 		</div>
 	)
 };

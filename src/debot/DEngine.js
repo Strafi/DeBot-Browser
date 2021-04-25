@@ -22,7 +22,9 @@ class DEngine {
 
 		const { debot_handle } = initParams;
 
-		return this.debotModule.start({ debot_handle });
+		await this.debotModule.start({ debot_handle });
+
+		return initParams;
 	}
 
 	async callDebotFunction(debotAddress, interfaceAddress, functionId, input) {
@@ -59,7 +61,7 @@ class DEngine {
 
 			return sendRes;
 		} catch(err) {
-			console.log(err);
+			console.error(err);
 
 			store.dispatch(pushItemToStage({
 				text: err.message,

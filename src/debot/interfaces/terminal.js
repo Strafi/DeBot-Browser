@@ -28,19 +28,49 @@ class Terminal {
 	}
 
 	inputInt(params) {
+		const { answerId, prompt } = params.value;
 
-	}
-
-	inputUint(params) {
+		const decodedPrompt = decodeString(prompt);
+		const stageObject = {
+			text: decodedPrompt,
+			functionId: answerId,
+			component: COMPONENTS_BINDINGS.AMOUNT_INPUT,
+			interfaceAddress: `${DEBOT_WC}:${this.id}`,
+		};
 		
+		store.dispatch(pushItemToStage(stageObject));
 	}
 
 	inputTons(params) {
+		const { answerId, prompt } = params.value;
+
+		const decodedPrompt = decodeString(prompt);
+		const stageObject = {
+			text: decodedPrompt,
+			functionId: answerId,
+			config: {
+				min: '0',
+				decimals: '9',
+			},
+			component: COMPONENTS_BINDINGS.TOKENS_INPUT,
+			interfaceAddress: `${DEBOT_WC}:${this.id}`,
+		};
 		
+		store.dispatch(pushItemToStage(stageObject));
 	}
 
 	inputBoolean(params) {
+		const { answerId, prompt } = params.value;
+
+		const decodedPrompt = decodeString(prompt);
+		const stageObject = {
+			text: decodedPrompt,
+			functionId: answerId,
+			component: COMPONENTS_BINDINGS.CONFIRM_INPUT,
+			interfaceAddress: `${DEBOT_WC}:${this.id}`,
+		};
 		
+		store.dispatch(pushItemToStage(stageObject));
 	}
 
 	print(params) {
@@ -83,7 +113,7 @@ class Terminal {
 					return this.inputInt(extendedParams);
 
 				case 'inputUint':
-					return this.inputUint(extendedParams);
+					return this.inputInt(extendedParams);
 
 				case 'inputTons':
 					return this.inputTons(extendedParams);

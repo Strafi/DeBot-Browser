@@ -1,7 +1,8 @@
 import store from 'src/store';
 import tonClient from 'src/tonClient';
 import { DEngine } from 'src/debot';
-import { DEBOT_WC } from 'src/constants';
+import { COMPONENTS_BINDINGS, DEBOT_WC } from 'src/constants';
+import { pushItemToStage } from 'src/store/actions/debot';
 import { setSigningBox, setApproveWindow } from 'src/store/actions/debot';
 import InterfacesController from './interfaces';
 
@@ -80,10 +81,20 @@ class DebotBrowser {
 			} else {
 				console.log('Call other debot', parsedMessage, params);
 				
-				await DEngine.runDebot(dst);
+				const { debot_handle } = await DEngine.runDebot(dst);
+
+				await DEngine.debotModule.send({ debot_handle, message: params.message });
 			}
 		} catch(err) {
 			console.error(err);
+
+			const stageObject = {
+				text: err.message,
+				component: COMPONENTS_BINDINGS.TEXT,
+				isError: true,
+			};
+			
+			store.dispatch(pushItemToStage(stageObject));
 		}	
 	};
 
