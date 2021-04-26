@@ -1,3 +1,4 @@
+export { default as addLocalDebot } from './addLocalDebot';
 export { default as decodeString } from './decodeString';
 export { default as encodeString } from './encodeString';
 export { default as createDebotUrl } from './createDebotUrl';

@@ -1,8 +1,39 @@
 @import '../../styles/colors.scss';
+@import '../../styles/size.scss';
 
-.contests-list {
+.debots-list {
 	position: relative;
 	width: 100%;
+
+	&__controls {
+		display: flex;
+		justify-content: flex-end;
+		width: 100%;
+		height: $debot-page-controls-height;
+		margin: 0 auto;
+	}
+
+	&__controls-item {
+		height: max-content;
+		margin-right: 20px;
+		font-weight: 600;
+		font-size: 18px;
+		color: $blue;
+		cursor: pointer;
+		transition: color .2s;
+
+		&:hover {
+			color: $light-blue;
+		}
+
+		&:active {
+			color: $dark-blue;
+		}
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
 
 	&__item {
 		display: inline-block;
@@ -48,6 +79,22 @@
 		&--ended {
 			font-weight: 600;
 			color: $black;
+		}
+	}
+
+	&__item-address {
+		font-size: 16px;
+		font-weight: 400;
+		color: $grey;
+	}
+
+	&__section-title {
+		margin-bottom: 24px;
+		font-size: 20px;
+		font-weight: 700;
+
+		&:not(:first-child) {
+			margin-top: 24px;
 		}
 	}
 }

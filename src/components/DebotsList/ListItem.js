@@ -4,12 +4,15 @@ import { createDebotUrl } from 'src/helpers';
 
 const ListItem = ({ debot, isGrey }) => {
 	const linkAddress = createDebotUrl(debot.address);
-	const listItemClassName = `contests-list__item ${isGrey ? 'contests-list__item--grey' : ''}`;
+	const listItemClassName = `debots-list__item ${isGrey ? 'debots-list__item--grey' : ''}`;
 
 	return (
 		<Link to={linkAddress} className={listItemClassName}>
-			<div className='contests-list__item-title'>
-				{debot.title}
+			<div className='debots-list__item-title'>
+				{debot.label || debot.title}
+			</div>
+			<div className='debots-list__item-address'>
+				{debot.address}
 			</div>
 		</Link>
 	);

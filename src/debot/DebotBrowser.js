@@ -27,7 +27,17 @@ class DebotBrowser {
 			debot_abi: this.debot_abi,
 			info: this.info,
 		};
+
 		console.log(browserParams, loggerParams);
+
+		if (loggerParams.msg) {
+			const stageObject = {
+				text: loggerParams.msg,
+				component: COMPONENTS_BINDINGS.TEXT,
+			};
+			
+			store.dispatch(pushItemToStage(stageObject));
+		}
 	};
 
 	switch(params) {

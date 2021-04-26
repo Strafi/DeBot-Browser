@@ -32,7 +32,8 @@ const Input = ({
 	const handleKeyPress = async event => {
 		const { shiftKey, key, altKey } = event;
 		const isEnter = key === 'Enter';
-		const shouldTriggerFunction = isEnter && !shiftKey && !altKey && !errorText && inputValue && !customErrorText;
+		const isSendKeyPressed = isEnter && !shiftKey && !altKey;
+		const shouldTriggerFunction = isSendKeyPressed && !errorText && inputValue && !customErrorText;
 
 		if (shouldTriggerFunction) {
 			event.preventDefault();

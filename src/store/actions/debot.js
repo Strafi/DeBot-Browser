@@ -3,6 +3,7 @@ export const CLEAR_STAGE = 'debot/CLEAR_STAGE';
 export const SET_SIGNING_BOX = 'debot/SET_SIGNING_BOX';
 export const SET_APPROVE_WINDOW = 'debot/SET_APPROVE_WINDOW';
 export const FILTER_DEBOTS_LIST_BY_NAME = 'debot/FILTER_DEBOTS_LIST_BY_NAME';
+export const SET_LOCAL_DEBOTS_LIST = 'debot/SET_LOCAL_DEBOTS_LIST';
 
 export const pushItemToStage = item => dispatch => {
 	dispatch({
@@ -33,5 +34,12 @@ export const filterDebotsListByName = filterValue => dispatch => {
 	dispatch({
 		type: FILTER_DEBOTS_LIST_BY_NAME,
 		payload: filterValue,
+	})
+}
+
+export const setLocalDebotsList = debotsList => dispatch => {
+	dispatch({
+		type: SET_LOCAL_DEBOTS_LIST,
+		payload: debotsList,
 	})
 }

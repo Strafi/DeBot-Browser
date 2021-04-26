@@ -1,0 +1,21 @@
+@import '../../../styles/colors.scss';
+@import '../../../styles/mixins.scss';
+
+.add-debot {
+	padding: 12px 14px;
+
+	&__submit-button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 36px;
+		font-weight: 600;
+		font-size: 16px;
+		color: $white;
+		border-radius: 12px;
+		background-color: $dark-green;
+		user-select: none;
+		
+		@include export-button-effects($dark-green, $white);
+	}
+}

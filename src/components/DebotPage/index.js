@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { DEngine } from 'src/debot';
 import { useSearchParams } from 'src/helpers';
 import { clearStage } from 'src/store/actions/debot';
-import { SigningBox, ApproveWindow } from 'src/components';
+import { SigningBox, ApproveWindow, ControlWithPopup } from 'src/components';
 import Stage from './Stage';
 import './index.scss';
 
@@ -59,6 +59,9 @@ const DebotPage = () => {
 				>
 					Restart DeBot
 				</div>
+				<ControlWithPopup name='Show Environment'>
+
+				</ControlWithPopup>
 			</div>
 			<Stage isDebotError={isDebotError} />
 			{isSigningBoxVisible && <SigningBox />}

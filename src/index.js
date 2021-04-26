@@ -4,10 +4,15 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom';
 import store from 'src/store'
 import { App } from 'src/components';
+import { isWindows } from 'src/helpers';
 
 import 'src/styles/index.scss';
 
 require('dotenv').config();
+
+if (isWindows) {
+	document.querySelector('body')?.classList.add('with-custom-scrollbar');
+}
 
 ReactDOM.render(
 	<Provider store={store}>

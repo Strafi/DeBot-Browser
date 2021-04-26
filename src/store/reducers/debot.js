@@ -4,7 +4,9 @@ import {
 	SET_SIGNING_BOX,
 	SET_APPROVE_WINDOW,
 	FILTER_DEBOTS_LIST_BY_NAME,
+	SET_LOCAL_DEBOTS_LIST,
 } from '../actions/debot';
+import { USER_DEBOTS_LS_FIELD } from 'src/constants';
 
 const initialState = {
 	stage: [],
@@ -12,8 +14,9 @@ const initialState = {
 	approveWindow: null,
 	debotsList: [
 		{ title: 'TIP-3 DeBot', address: '0:81c12c2f4514124536aafea59db7df0262d3af877b4477afe6514bbc5bc9f317' },
-		{ title: 'SMV DeBot', address: '0:704c8d64aed3c79e84ab1a8fc7076de287aa8ddbb967687ce1342d71bd73ff32' },
+		{ title: 'SMV DeBot (RSquad)', address: '0:2a92e3d01c530697a0ec3ab5c3494474faa7ea0af5fa30d4ed508115bc9957a7' },
 	],
+	localDebotsList: JSON.parse(localStorage.getItem(USER_DEBOTS_LS_FIELD)) || [],
 }
   
 function reducer(state = initialState, action) {
@@ -57,6 +60,13 @@ function reducer(state = initialState, action) {
 			return {
 				...state,
 				debotsList,
+			}
+		}
+
+		case SET_LOCAL_DEBOTS_LIST: {
+			return {
+				...state,
+				localDebotsList: payload,
 			}
 		}
 

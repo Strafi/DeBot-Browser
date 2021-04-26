@@ -67,16 +67,20 @@ const ApproveWindow = () => {
 								Amount
 							</div>
 						</div>
-						{out.map((spending, index) => (
-							<div key={`${spending}-${index}`} className='approve-window__transfers-row'>
-								<div className='approve-window__transfers-col'>
-									<a href={createExplorerUrl(spending.recipient)} target="_blank" rel="noreferrer">{spending.recipient}</a>
+						{out.map((spending, index) => {
+							const recipient = spending.recipient || spending.dst;
+
+							return (
+								<div key={`${recipient}-${index}`} className='approve-window__transfers-row'>
+									<div className='approve-window__transfers-col'>
+										<a href={createExplorerUrl(recipient)} target="_blank" rel="noreferrer">{recipient}</a>
+									</div>
+									<div className='approve-window__transfers-col'>
+										{convertFromNano(spending.amount)} tokens
+									</div>
 								</div>
-								<div className='approve-window__transfers-col'>
-									{convertFromNano(spending.amount)} tokens
-								</div>
-							</div>
-						))}
+							)
+						})}
 					</div>
 				}
 				{!!setcode
