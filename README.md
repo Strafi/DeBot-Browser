@@ -1,9 +1,10 @@
 ## Check-list  
 [] Flow from contest document works
-[] Notes
+[x] Local DeBots
+[] Environment
 [] Select network
 [] PWA
-[] EXTRA: Syntax to paste items from notes
+[] EXTRA: Syntax to paste items from Environment
 
 ### `yarn build`
 

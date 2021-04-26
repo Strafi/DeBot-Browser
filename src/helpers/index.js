@@ -6,6 +6,7 @@ export { default as createExplorerUrl } from './createExplorerUrl';
 export { default as checkIsValidAddress } from './checkIsValidAddress';
 export { default as formDebotFunctionFromId } from './formDebotFunctionFromId';
 export { default as genKeyPairFromMnemonic } from './genKeyPairFromMnemonic';
+export { default as removeLocalDebot } from './removeLocalDebot';
 export { default as isWindows } from './isWindows';
 
 export { default as useSearchParams } from './hooks/useSearchParams';

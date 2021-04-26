@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux';
-import { Loader, ControlWithPopup } from 'src/components'; 
-import AddDebot from './AddDebot';
+import { Loader, ControlWithPopup, AddDebot } from 'src/components';
 import DebotListItem from './ListItem';
 import './index.scss';
 

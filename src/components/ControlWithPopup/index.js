@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import ControlWithPopupContext from './ControlWithPopupContext';
+import { ControlWithPopupContext } from 'src/contexts';
 import './index.scss';
 
 const DEFAULT_WIDTH = 460;

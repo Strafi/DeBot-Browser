@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { addLocalDebot } from 'src/helpers';
-import ControlWithPopupContext from '../../ControlWithPopup/ControlWithPopupContext';
+import { ControlWithPopupContext } from 'src/contexts';
 import './index.scss';
 
-const AddDebot = () => {
+const AddDebot = ({ prefilledAddress = '' }) => {
 	const popupContext = useContext(ControlWithPopupContext);
 	const [debotLabel, setDebotLabel] = useState('');
-	const [debotAddress, setDebotAddress] = useState('');
+	const [debotAddress, setDebotAddress] = useState(prefilledAddress);
 
 	const handleAddressChange = e => setDebotAddress(e.target.value);
 
@@ -17,7 +17,6 @@ const AddDebot = () => {
 			addLocalDebot(debotLabel, debotAddress);
 
 			if (popupContext)
-				console.log(popupContext)
 				popupContext.closePopup();
 		}
 	};

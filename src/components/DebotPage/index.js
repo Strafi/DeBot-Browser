@@ -2,19 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { DEngine } from 'src/debot';
-import { useSearchParams } from 'src/helpers';
+import { useDebotAddress, removeLocalDebot } from 'src/helpers';
 import { clearStage } from 'src/store/actions/debot';
-import { SigningBox, ApproveWindow, ControlWithPopup } from 'src/components';
+import { SigningBox, ApproveWindow, ControlWithPopup, AddDebot } from 'src/components';
 import Stage from './Stage';
 import './index.scss';
 
 const DebotPage = () => {
 	const dispatch = useDispatch();
-	const searchParams = useSearchParams();
+	const debotAddress = useDebotAddress();
 	const [isDebotError, setIsDebotError] = useState(false);
 	const isSigningBoxVisible = useSelector(state => !!state.debot.signingBox);
 	const isApproveWindowVisible = useSelector(state => !!state.debot.approveWindow);
-	const debotAddress = searchParams.get('debotAddress');
+	const isDebotSaved = useSelector(state => !!state.debot.localDebotsList.find(debot => debot.address === debotAddress));
 
 	useEffect(() => {
 		const asyncEffect = async () => {
@@ -59,6 +59,17 @@ const DebotPage = () => {
 				>
 					Restart DeBot
 				</div>
+				{isDebotSaved
+					? <div
+						className='debot-page__controls-item'
+						onClick={() => removeLocalDebot(debotAddress)}
+					>
+						Remove from Saved
+					</div>
+					: <ControlWithPopup name='Save DeBot'>
+						<AddDebot prefilledAddress={debotAddress} />
+					</ControlWithPopup>
+				}
 				<ControlWithPopup name='Show Environment'>
 
 				</ControlWithPopup>
