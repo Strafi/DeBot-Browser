@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { DEngine } from 'src/debot';
 import { useDebotAddress, removeLocalDebot } from 'src/helpers';
 import { clearStage } from 'src/store/actions/debot';
-import { SigningBox, ApproveWindow, ControlWithPopup, AddDebot } from 'src/components';
+import { SigningBox, ApproveWindow, ControlWithPopup, AddDebot, Environment } from 'src/components';
 import Stage from './Stage';
 import './index.scss';
 
@@ -70,8 +70,8 @@ const DebotPage = () => {
 						<AddDebot prefilledAddress={debotAddress} />
 					</ControlWithPopup>
 				}
-				<ControlWithPopup name='Show Environment'>
-
+				<ControlWithPopup height={460} width={650} name='Show Environment'>
+					<Environment />
 				</ControlWithPopup>
 			</div>
 			<Stage isDebotError={isDebotError} />

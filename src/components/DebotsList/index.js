@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux';
-import { Loader, ControlWithPopup, AddDebot } from 'src/components';
+import { Loader, ControlWithPopup, AddDebot, Environment } from 'src/components';
 import DebotListItem from './ListItem';
 import './index.scss';
 
@@ -12,7 +12,7 @@ const DebotsList = () => {
 		<DebotListItem
 			isGrey={index % 2 === 0 || index === 0}
 			debot={debot}
-			key={debot.address}
+			key={`${debot.address}-${index}`}
 		/>
 	));
 
@@ -20,7 +20,7 @@ const DebotsList = () => {
 		<DebotListItem
 			isGrey={index % 2 === 0 || index === 0}
 			debot={debot}
-			key={debot.address}
+			key={`${debot.address}-${index}`}
 		/>
 	));
 
@@ -30,8 +30,8 @@ const DebotsList = () => {
 				<ControlWithPopup name='Add DeBot'>
 					<AddDebot />
 				</ControlWithPopup>
-				<ControlWithPopup name='Show Environment'>
-
+				<ControlWithPopup height={460} width={650} name='Show Environment'>
+					<Environment />
 				</ControlWithPopup>
 			</div>
 			{!!localDebotsList.length

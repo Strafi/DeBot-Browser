@@ -1,0 +1,108 @@
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+
+.environment {
+	padding: 12px 14px 12px 14px;
+
+	&__input-container {
+		display: flex;
+		align-items: center;
+		margin-bottom: 14px;
+
+		:first-child {
+			width: 40%;
+		}
+
+		:last-child {
+			width: 57%;
+			margin: 0;
+		}
+	}
+
+	&__divider {
+		display: flex;
+		justify-content: center;
+		font-size: 30px;
+		width: 3%;
+	}
+
+	&__table {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		font-size: 18px;
+		background: $light-grey;
+		border-radius: 8px;
+
+		&--wrapper {
+			height: 335px;
+			margin-bottom: 8px;
+			overflow-y: auto;
+		}
+
+		&-row {
+			display: flex;
+
+			&:not(:last-child) {
+				border-bottom: 1px dashed $grey;
+			}
+		}
+
+		&-col {
+			width: 58.5%;
+			padding: 4px 7px 4px 6px;
+			word-wrap: break-word; 
+
+			&--title {
+				width: 41.5%;
+				font-weight: 600;
+				padding: 4px 6px 4px 7px;
+				border-right: 1px dashed $grey;
+			}
+		}
+	}
+
+	&__image {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		img {
+			max-width: 170px;
+			max-height: 170px;
+			margin: 14px 0;
+		}
+
+		&-text {
+			font-weight: 600;
+			font-size: 20px;
+			text-align: center;
+
+			&:not(:last-child) {
+				margin-bottom: 8px;
+			}
+
+			&--warning {
+				color: $warning;
+			}
+		}
+	}
+
+	&__submit-button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 36px;
+		max-width: 180px;
+		margin-left: auto;
+		font-weight: 600;
+		font-size: 16px;
+		color: $white;
+		border-radius: 12px;
+		background-color: $dark-green;
+		user-select: none;
+		
+		@include export-button-effects($dark-green, $white);
+	}
+}

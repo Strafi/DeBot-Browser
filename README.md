@@ -1,7 +1,7 @@
 ## Check-list  
 [] Flow from contest document works
 [x] Local DeBots
-[] Environment
+[x] Environment
 [] Select network
 [] PWA
 [] EXTRA: Syntax to paste items from Environment

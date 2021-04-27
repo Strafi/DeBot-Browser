@@ -6,5 +6,6 @@ export { default as DebotPage } from './DebotPage';
 export { default as SigningBox } from './SigningBox';
 export { default as ApproveWindow } from './ApproveWindow';
 export { default as AddDebot } from './AddDebot';
+export { default as Environment } from './Environment';
 export { default as ControlWithPopup } from './ControlWithPopup';
 export { default as Loader } from './Loader';
