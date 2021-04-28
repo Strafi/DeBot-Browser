@@ -61,7 +61,7 @@
 	}
 }
 
-@mixin cancel-button-effects() {
+@mixin cancel-button-effects($color: $cancel-color) {
 	cursor: pointer;
 
 	path {
@@ -70,13 +70,13 @@
 
 	&:hover {
 		path {
-			stroke: darken($cancel-color, 15%);
+			stroke: darken($color, 15%);
 		}
 	}
 
 	&:active {
 		path {
-			stroke: darken($cancel-color, 20%);
+			stroke: darken($color, 20%);
 		}
 	}
 }

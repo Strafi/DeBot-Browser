@@ -3,7 +3,7 @@
 [x] Local DeBots
 [x] Environment
 [] Select network
-[] PWA
+[x] PWA
 [] EXTRA: Syntax to paste items from Environment
 
 ### `yarn build`

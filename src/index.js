@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import store from 'src/store'
 import { App } from 'src/components';
 import { isWindows } from 'src/helpers';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 import 'src/styles/index.scss';
 
@@ -22,3 +23,5 @@ ReactDOM.render(
 	</Provider>,
 	document.getElementById('root'),
 );
+
+serviceWorkerRegistration.register();

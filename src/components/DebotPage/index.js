@@ -70,7 +70,7 @@ const DebotPage = () => {
 						<AddDebot prefilledAddress={debotAddress} />
 					</ControlWithPopup>
 				}
-				<ControlWithPopup height={460} width={650} name='Show Environment'>
+				<ControlWithPopup height={464} width={650} name='Show Environment'>
 					<Environment />
 				</ControlWithPopup>
 			</div>

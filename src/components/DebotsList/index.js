@@ -30,7 +30,7 @@ const DebotsList = () => {
 				<ControlWithPopup name='Add DeBot'>
 					<AddDebot />
 				</ControlWithPopup>
-				<ControlWithPopup height={460} width={650} name='Show Environment'>
+				<ControlWithPopup height={464} width={660} name='Show Environment'>
 					<Environment />
 				</ControlWithPopup>
 			</div>
