@@ -21,6 +21,16 @@ class DebotBrowser {
 		this.info = info;
 	}
 
+	showDeprecatedMessage() {
+		const stageObject = {
+			text: 'This DeBot is deprecated and therefore no longer supported.',
+			component: COMPONENTS_BINDINGS.TEXT,
+			isError: true,
+		};
+		
+		store.dispatch(pushItemToStage(stageObject));
+	}
+
 	log(loggerParams) {
 		const browserParams = {
 			debot_handle: this.debot_handle,
@@ -40,20 +50,12 @@ class DebotBrowser {
 		}
 	};
 
-	switch(params) {
-		console.log(params)
+	show_action() {
+		this.showDeprecatedMessage();
 	};
 
-	switch_completed() {
-		console.log({ msg: 'Switch completed' })
-	};
-
-	show_action(params) {
-		console.log(params)
-	};
-
-	input(params) {
-		console.log(params)
+	input() {
+		this.showDeprecatedMessage();
 	};
 
 	async get_signing_box() {
@@ -72,8 +74,8 @@ class DebotBrowser {
 		return { signing_box: handle };
 	};
 
-	invoke_debot(params) {
-		console.log(params)
+	invoke_debot() {
+		this.showDeprecatedMessage();
 	};
 
 	async send(params) {

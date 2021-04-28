@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useDebotAddress, encodeString } from 'src/helpers';
+import { useDebotAddress, encodeString, getEnvVariableFromInput } from 'src/helpers';
 import { DEngine } from 'src/debot';
 import './index.scss';
 
@@ -42,7 +42,9 @@ const Input = ({
 				if (customCallback)
 					return customCallback(inputValue);
 
-				await DEngine.callDebotFunction(debotAddress, interfaceAddress, functionId, { value: encodeString(inputValue) });
+				const value = getEnvVariableFromInput(inputValue) || inputValue;
+
+				await DEngine.callDebotFunction(debotAddress, interfaceAddress, functionId, { value: encodeString(value) });
 			} catch(err) {
 				setErrorText(err.message);
 			}

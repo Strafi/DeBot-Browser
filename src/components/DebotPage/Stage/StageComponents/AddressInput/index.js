@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDebotAddress, checkIsValidAddress } from 'src/helpers';
+import { useDebotAddress, checkIsValidAddress, getEnvVariableFromInput } from 'src/helpers';
 import { Input } from '../';
 import { DEngine } from 'src/debot';
 
@@ -10,12 +10,14 @@ const AddressInput = ({ params }) => {
 
 	const handleSubmit = async inputValue => {
 		try {
-			const isValidAddress = await checkIsValidAddress(inputValue);
+			const value = getEnvVariableFromInput(inputValue) || inputValue;
+
+			const isValidAddress = await checkIsValidAddress(value);
 
 			if (!isValidAddress)
 				return setErrorText('Invalid address');
 
-			await DEngine.callDebotFunction(debotAddress, interfaceAddress, functionId, { value: inputValue });
+			await DEngine.callDebotFunction(debotAddress, interfaceAddress, functionId, { value });
 		} catch(err) {
 			setErrorText(err.message);
 		}

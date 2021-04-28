@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
 import { COMPONENTS_BINDINGS } from 'src/constants';
-import { isWindows } from 'src/helpers';
+import { isCustomScrollBar } from 'src/helpers';
 import { Loader } from 'src/components';
 import {
 	Text,
@@ -57,7 +57,7 @@ class Stage extends Component {
 
 		const stageComponents = this.formStageComponents();
 
-		const stageClassName = `stage ${isWindows() ? 'with-custom-scrollbar' : ''}`;
+		const stageClassName = `stage ${isCustomScrollBar() ? 'with-custom-scrollbar' : ''}`;
 
 		return (
 			<div ref={this.stageRef} className={stageClassName}>

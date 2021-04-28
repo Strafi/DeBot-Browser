@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { addEnvVariable, removeEnvVariable, isWindows } from 'src/helpers';
+import { addEnvVariable, removeEnvVariable, isCustomScrollBar } from 'src/helpers';
 import { CancelIcon } from 'src/components/icons';
 import './index.scss';
 
@@ -55,7 +55,7 @@ const Environment = () => {
 
 	return (
 		<div className='environment'>
-			<div className={`environment__table--wrapper ${isWindows() ? 'with-custom-scrollbar' : ''}`}>
+			<div className={`environment__table--wrapper ${isCustomScrollBar() ? 'with-custom-scrollbar' : ''}`}>
 				{!!envEntries.length
 					? <div className='environment__table'>
 						{renderVariablesTableItems()}
