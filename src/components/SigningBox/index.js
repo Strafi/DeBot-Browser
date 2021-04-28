@@ -102,7 +102,7 @@ const SigningBox = () => {
 					OR
 				</div>
 				<div
-				 	className={`signing-box__upload-keys ${isDropable ? 'signing-box__upload-keys--dropable' : ''}`}
+					className={`signing-box__upload-keys ${isDropable ? 'signing-box__upload-keys--dropable' : ''}`}
 					onDragEnter={handleDragEnter}
 					onDrop={handleDrop}
 					onDragOver={preventEvent}

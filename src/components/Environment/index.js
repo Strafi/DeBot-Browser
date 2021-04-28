@@ -56,7 +56,7 @@ const Environment = () => {
 	return (
 		<div className='environment'>
 			<div className={`environment__table--wrapper ${isCustomScrollBar() ? 'with-custom-scrollbar' : ''}`}>
-				{!!envEntries.length
+				{envEntries.length
 					? <div className='environment__table'>
 						{renderVariablesTableItems()}
 					</div>

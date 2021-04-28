@@ -45,6 +45,7 @@
   "eslintConfig": {
     "extends": [
       "react-app",
+	  "eslint:recommended",
       "react-app/jest"
     ]
   },

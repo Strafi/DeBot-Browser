@@ -56,15 +56,15 @@ class DebotBrowser {
 			
 			store.dispatch(pushItemToStage(stageObject));
 		}
-	};
+	}
 
 	show_action() {
 		this.showDeprecatedMessage();
-	};
+	}
 
 	input() {
 		this.showDeprecatedMessage();
-	};
+	}
 
 	async get_signing_box() {
 		const keysPromise = new Promise((resolve) => {
@@ -80,11 +80,11 @@ class DebotBrowser {
 		store.dispatch(setSigningBox(null));
 
 		return { signing_box: handle };
-	};
+	}
 
 	invoke_debot() {
 		this.showDeprecatedMessage();
-	};
+	}
 
 	async send(params) {
 		try {
@@ -116,7 +116,7 @@ class DebotBrowser {
 			
 			store.dispatch(pushItemToStage(stageObject));
 		}	
-	};
+	}
 
 	async approve(params) {
 		const approvePromise = new Promise((resolve) => {
@@ -131,7 +131,7 @@ class DebotBrowser {
 		store.dispatch(setApproveWindow(null));
 
 		return { approved };
-	};
+	}
 }
 
 export default DebotBrowser;
