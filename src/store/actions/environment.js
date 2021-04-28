@@ -1,4 +1,4 @@
-export const SET_ENVIRONMENT_VARIABLE = 'debot/ADD_ENVIRONMENT_VARIABLES';
+export const SET_ENVIRONMENT_VARIABLE = 'debot/SET_ENVIRONMENT_VARIABLES';
 
 export const setEnvironmentVariables = variables => dispatch => {
 	dispatch({

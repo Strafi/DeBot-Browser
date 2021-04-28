@@ -24,6 +24,10 @@ const DERIVATION_PATH = "m/44'/396'/0'/0/0";
 
 const USER_DEBOTS_LS_FIELD = 'USER_DEBOTS_LS_FIELD';
 const USER_ENV_LS_FIELD = 'USER_ENV_LS_FIELD';
+const TON_NETWORK_LS_FIELD = 'TON_NETWORK_LS_FIELD';
+
+const MAIN_NETWORK = 'main.ton.dev';
+const DEV_NETWORK = 'net.ton.dev';
 
 module.exports = {
 	EXPLORER_BASE_URL,
@@ -35,4 +39,7 @@ module.exports = {
 	DERIVATION_PATH,
 	USER_DEBOTS_LS_FIELD,
 	USER_ENV_LS_FIELD,
+	TON_NETWORK_LS_FIELD,
+	MAIN_NETWORK,
+	DEV_NETWORK,
 }

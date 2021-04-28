@@ -50,20 +50,21 @@
 		visibility: hidden;
 		opacity: 0;
 		right: 0;
-		bottom: calc(0px - var(--height));
-		height: var(--height);
+		top: 30px;
+		height: max-content;
+		max-height: var(--height);
 		width: var(--width);
 		background-color: $white;
 		border-radius: 10px;
 		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
-		transition: opacity .2s, bottom .2s;
+		transition: opacity .2s, top .2s;
 		overflow: auto;
 		cursor: default;
 
 		&--visible {
 			visibility: visible;
 			opacity: 1;
-			bottom: calc(-8px - var(--height));
+			top: 38px;
 		}
 	}
 }

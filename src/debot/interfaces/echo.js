@@ -1,5 +1,5 @@
 import store from 'src/store';
-import tonClient from 'src/tonClient';
+import tonClientController from 'src/tonClient';
 import { DEngine } from 'src/debot';
 import { decodeString, encodeString } from 'src/helpers';
 import { COMPONENTS_BINDINGS, DEBOT_WC } from 'src/constants';
@@ -39,7 +39,7 @@ class Echo {
 
 	async call(params) {
 		try {
-			const decodedMessage = await tonClient.abi.decode_message({
+			const decodedMessage = await tonClientController.client.abi.decode_message({
 				abi: {
 					type: 'Contract',
 					value: this.abi,

@@ -8,4 +8,5 @@ export { default as ApproveWindow } from './ApproveWindow';
 export { default as AddDebot } from './AddDebot';
 export { default as Environment } from './Environment';
 export { default as ControlWithPopup } from './ControlWithPopup';
+export { default as OptionsList } from './OptionsList';
 export { default as Loader } from './Loader';

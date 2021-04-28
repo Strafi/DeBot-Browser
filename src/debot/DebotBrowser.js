@@ -1,5 +1,5 @@
 import store from 'src/store';
-import tonClient from 'src/tonClient';
+import tonClientController from 'src/tonClient';
 import { DEngine } from 'src/debot';
 import { COMPONENTS_BINDINGS, DEBOT_WC } from 'src/constants';
 import { pushItemToStage } from 'src/store/actions/debot';
@@ -65,7 +65,7 @@ class DebotBrowser {
 
 		const keys = await keysPromise;
 
-		const { handle } = await tonClient.crypto.get_signing_box(keys);
+		const { handle } = await tonClientController.client.crypto.get_signing_box(keys);
 
 		store.dispatch(setSigningBox(null));
 
@@ -78,7 +78,7 @@ class DebotBrowser {
 
 	async send(params) {
 		try {
-			const parsedMessage = await tonClient.boc.parse_message({ boc: params.message })
+			const parsedMessage = await tonClientController.client.boc.parse_message({ boc: params.message })
 
 			const { dst, src, dst_workchain_id } = parsedMessage.parsed;
 			const [, interfaceId] = dst.split(':');
@@ -91,7 +91,7 @@ class DebotBrowser {
 			} else {
 				console.log('Call other debot', parsedMessage, params);
 				
-				const { debot_handle } = await DEngine.runDebot(dst);
+				const { debot_handle } = await DEngine.initDebot(dst);
 
 				await DEngine.debotModule.send({ debot_handle, message: params.message });
 			}

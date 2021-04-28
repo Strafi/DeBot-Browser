@@ -1,5 +1,5 @@
 import store from 'src/store';
-import tonClient from 'src/tonClient';
+import tonClientController from 'src/tonClient';
 import { decodeString } from 'src/helpers';
 import { COMPONENTS_BINDINGS, DEBOT_WC } from 'src/constants';
 import { pushItemToStage } from 'src/store/actions/debot';
@@ -30,7 +30,7 @@ class NumberInput {
 
 	async call(params) {
 		try {
-			const decodedMessage = await tonClient.abi.decode_message({
+			const decodedMessage = await tonClientController.client.abi.decode_message({
 				abi: {
 					type: 'Contract',
 					value: this.abi,

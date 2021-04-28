@@ -1,24 +1,38 @@
 import store from 'src/store';
 import { DebotModule } from '@tonclient/core';
-import tonClient from 'src/tonClient';
+import tonClientController from 'src/tonClient';
 import { formDebotFunctionFromId } from 'src/helpers';
-import { COMPONENTS_BINDINGS } from 'src/constants';
+import { COMPONENTS_BINDINGS, DEV_NETWORK } from 'src/constants';
 import { pushItemToStage, clearStage, setApproveWindow, setSigningBox } from 'src/store/actions/debot';
 import DebotBrowser from './DebotBrowser';
 
 class DEngine {
 	constructor() {
-		this.debotModule = new DebotModule(tonClient);
+		this.mainDebotModule = new DebotModule(tonClientController.mainNetClient);
+		this.devDebotModule = new DebotModule(tonClientController.devNetClient);
 		this.storage = new Map();
 	}
 
-	async runDebot(address) {
+	get debotModule() {
+		if (tonClientController.selectedNetwork === DEV_NETWORK)
+			return this.devDebotModule;
+
+		return this.mainDebotModule;
+	}
+
+	async initDebot(address) {
 		const debotBrowser = new DebotBrowser();
 
 		const initParams = await this.debotModule.init({ address }, debotBrowser);
 
 		debotBrowser.setDebotParams(initParams);
 		this.storage.set(address, initParams);
+
+		return initParams
+	}
+
+	async runDebot(address) {
+		const initParams = await this.initDebot(address);
 
 		const { debot_handle } = initParams;
 
@@ -45,7 +59,7 @@ class DEngine {
 			}
 		}
 
-		const encodedMessage = await tonClient.abi.encode_internal_message({
+		const encodedMessage = await tonClientController.client.abi.encode_internal_message({
 			abi: {
 				type: 'Json',
 				value: debot_abi,

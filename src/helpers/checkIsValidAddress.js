@@ -1,8 +1,8 @@
-import tonClient from 'src/tonClient';
+import tonClientController from 'src/tonClient';
 
 async function checkIsValidAddress(address) {
 	try {
-		const result = await tonClient.utils.convert_address({
+		const result = await tonClientController.client.utils.convert_address({
 			address,
 			output_format: {
 				type: 'Hex',
