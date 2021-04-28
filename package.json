@@ -36,9 +36,8 @@
   },
   "scripts": {
     "dev": "react-scripts start",
-    "start": "yarn build:local && yarn serve",
     "serve": "node node_modules/serve/bin/serve.js -s ./build",
-    "build:local": "react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
