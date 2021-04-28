@@ -11,11 +11,15 @@
 		padding: 0 30px;
 	}
 
-	@media (max-width: 644px) {
-		height: calc(#{$stage-height} - 56px);
+	@media (max-width: #{$min-checkpoint}) {
+		height: $stage-height-min;
+
+		.stage__container {
+			padding: 0 15px 0 0;
+		}
 	}
 
-	@media (max-width: 437px) {
-		height: calc(#{$stage-height} - 113px);
+	@media (max-width: 357px) {
+		height: calc(#{$stage-height-min} - 57px);
 	}
 }

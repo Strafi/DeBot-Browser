@@ -19,7 +19,7 @@
 	user-select: none;
 	cursor: pointer;
 
-	@media(max-width: 490px) {
+	@media(max-width: #{$extra-min-checkpoint}) {
 		width: 100%;
 		min-width: 100%;
 

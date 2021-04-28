@@ -16,6 +16,13 @@
 		>:first-child {
 			margin-right: auto;
 		}
+
+		@media(max-width: #{$min-checkpoint}) {
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: space-between;
+			height: calc(#{$debot-page-controls-height-min} + 10px);
+		}
 	}
 
 	&__controls-item {

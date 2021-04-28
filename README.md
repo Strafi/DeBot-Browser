@@ -4,7 +4,7 @@
 [x] Environment
 [x] Select network
 [x] PWA
-[] EXTRA: Syntax to paste items from Environment
+[x] EXTRA: Syntax to paste items from Environment
 
 ### `yarn build`
 

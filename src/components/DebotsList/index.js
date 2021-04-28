@@ -13,7 +13,7 @@ const DebotsList = () => {
 	const localDebotsList = useSelector(state => state.debot.localDebotsList);
 	const filterKey = useSelector(state => state.debot.filterKey);
 	const filteredDebots = debotsList.filter(debot => debot.title.toLowerCase().startsWith(filterKey) || debot.address.startsWith(filterKey));
-	const filteredLocalDebots = localDebotsList.filter(debot => debot.label.toLowerCase().startsWith(filterKey) || debot.address.startsWith(filterKey));
+	const filteredLocalDebots = localDebotsList.filter(debot => debot.title.toLowerCase().startsWith(filterKey) || debot.address.startsWith(filterKey));
 
 	const renderDebotListItems = () => filteredDebots.map((debot, index) => (
 		<DebotListItem
@@ -62,10 +62,10 @@ const DebotsList = () => {
 						{DEV_NETWORK}
 					</div>
 				</OptionsList>
-				<ControlWithPopup name='Add DeBot'>
+				<ControlWithPopup height={310} width={500} name='Add DeBot'>
 					<AddDebot />
 				</ControlWithPopup>
-				<ControlWithPopup height={464} width={660} name='Show Environment'>
+				<ControlWithPopup height={472} width={660} name='Show Environment'>
 					<Environment />
 				</ControlWithPopup>
 			</div>

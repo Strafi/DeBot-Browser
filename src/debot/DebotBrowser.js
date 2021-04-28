@@ -11,6 +11,7 @@ class DebotBrowser {
 		this.debot_handle = null;
 		this.debot_abi = null;
 		this.info = null;
+		this.deprecatedMessageTimeout = null;
 	}
 
 	setDebotParams(params) {
@@ -22,13 +23,20 @@ class DebotBrowser {
 	}
 
 	showDeprecatedMessage() {
-		const stageObject = {
-			text: 'This DeBot is deprecated and therefore no longer supported.',
-			component: COMPONENTS_BINDINGS.TEXT,
-			isError: true,
-		};
-		
-		store.dispatch(pushItemToStage(stageObject));
+		if (this.deprecatedMessageTimeout)
+			clearTimeout(this.deprecatedMessageTimeout);
+
+		this.deprecatedMessageTimeout = setTimeout(() => {
+			this.deprecatedMessageTimeout = null;
+
+			const stageObject = {
+				text: 'This DeBot is deprecated and therefore no longer supported.',
+				component: COMPONENTS_BINDINGS.TEXT,
+				isError: true,
+			};
+			
+			store.dispatch(pushItemToStage(stageObject));
+		}, 1000)
 	}
 
 	log(loggerParams) {

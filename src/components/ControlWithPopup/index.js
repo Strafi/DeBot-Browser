@@ -57,7 +57,7 @@ const ControlWithPopup = ({ children, name, height = DEFAULT_HEIGHT, width = DEF
 				style={containerStyles}
 			>
 				<ControlWithPopupContext.Provider value={{ closePopup }}>
-					{children}
+					{isControlOpen && children}
 				</ControlWithPopupContext.Provider>
 			</div>
 		</div>

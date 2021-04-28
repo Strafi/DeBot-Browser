@@ -8,3 +8,13 @@ $header-margin: 50px;
 $debot-page-controls-height: 40px;
 $debot-page-controls-margin: 10px;
 $stage-height: calc(100vh - #{$app-top-padding} - #{$app-top-padding} - #{$header-height} - #{$header-margin} - #{$debot-page-controls-height} - #{$debot-page-controls-margin});
+
+$min-checkpoint: 643px;
+$app-bottom-padding-min: 10px;
+$header-margin-min: 20px;
+$header-height-min: 176px;
+$debot-page-controls-height-min: 110px;
+$debot-page-controls-margin-min: 20px;
+$stage-height-min: calc(100vh - #{$app-top-padding} - #{$app-bottom-padding-min} - #{$header-height-min} - #{$header-margin-min} - #{$debot-page-controls-height-min} - #{$debot-page-controls-margin-min});
+
+$extra-min-checkpoint: 470px;

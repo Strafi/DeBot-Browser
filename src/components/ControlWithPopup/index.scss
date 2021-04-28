@@ -32,13 +32,33 @@
 		margin-right: 0;
 	}
 
+	@media(max-width: 770px) {
+		.control-with-popup__container {
+			position: fixed;
+			top: calc(#{$app-top-padding} + #{$header-height} + #{$header-margin} + #{$debot-page-controls-height} + #{$debot-page-controls-margin});
+			right: 20px;
+			max-width: 600px;
+		}
+	}
 
-	@media(max-width: 490px) {
+
+	@media(max-width: #{$min-checkpoint}) {
 		width: 100%;
 		min-width: 100%;
 
 		.control-with-popup__container {
-			width: 100%;
+			position: absolute;
+			top: 30px;
+			right: auto;
+			left: -50px;
+			width: calc(100% + 100px);
+		}
+	}
+
+	@media (max-width: #{$extra-min-checkpoint}) {
+		.control-with-popup__container {
+			left: -10px;
+			width: calc(100% + 20px);
 		}
 	}
 

@@ -14,6 +14,14 @@
 		width: 100%;
 		height: $debot-page-controls-height;
 		margin-bottom: $debot-page-controls-margin;
+
+		@media(max-width: #{$min-checkpoint}) {
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: space-between;
+			height: $debot-page-controls-height-min;
+			margin-bottom: $debot-page-controls-margin-min;
+		}
 	}
 
 	&__controls-item {

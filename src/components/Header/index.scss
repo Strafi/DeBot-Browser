@@ -6,6 +6,10 @@
 	position: relative;
 	margin-bottom: $header-margin;
 
+	@media(max-width: #{$min-checkpoint}) {
+		margin-bottom: $header-margin-min;
+	}
+
 	a {
 		display: inline-block;
 		margin-bottom: 26px;
@@ -76,7 +80,11 @@
 				width: 30px;
 				height: 30px;
 			}
-		} 
+		}
+
+		@media (max-width: #{$extra-min-checkpoint}) {
+			display: none;
+		}
 	}
 
 	&__address-explanation {

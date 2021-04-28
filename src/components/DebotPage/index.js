@@ -66,11 +66,11 @@ const DebotPage = () => {
 					>
 						Remove from Saved
 					</div>
-					: <ControlWithPopup name='Save DeBot'>
+					: <ControlWithPopup height={310} width={500} name='Save DeBot'>
 						<AddDebot prefilledAddress={debotAddress} />
 					</ControlWithPopup>
 				}
-				<ControlWithPopup height={464} width={650} name='Show Environment'>
+				<ControlWithPopup height={472} width={650} name='Show Environment'>
 					<Environment />
 				</ControlWithPopup>
 			</div>

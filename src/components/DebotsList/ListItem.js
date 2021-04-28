@@ -17,7 +17,7 @@ const ListItem = ({ debot, isGrey }) => {
 	return (
 		<Link to={linkAddress} className={listItemClassName} onClick={handleNetworkSwitch}>
 			<div className='debots-list__item-title'>
-				{debot.label || debot.title}
+				{debot.title}
 				{debot.network === DEV_NETWORK && <DevNetIcon />}
 				{debot.network === MAIN_NETWORK && <MainNetIcon />}
 			</div>
