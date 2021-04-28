@@ -2,6 +2,7 @@ import React, { useState, Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import tonClientController from 'src/tonClient';
 import { Loader, ControlWithPopup, AddDebot, Environment, OptionsList } from 'src/components';
+import { MainNetIcon, DevNetIcon } from 'src/components/icons';
 import { MAIN_NETWORK, DEV_NETWORK } from 'src/constants';
 import DebotListItem from './ListItem';
 import './index.scss';
@@ -10,8 +11,11 @@ const DebotsList = () => {
 	const [selectedNetwork, setSelectedNetwork] = useState(tonClientController.selectedNetwork);
 	const debotsList = useSelector(state => state.debot.debotsList);
 	const localDebotsList = useSelector(state => state.debot.localDebotsList);
+	const filterKey = useSelector(state => state.debot.filterKey);
+	const filteredDebots = debotsList.filter(debot => debot.title.toLowerCase().startsWith(filterKey) || debot.address.startsWith(filterKey));
+	const filteredLocalDebots = localDebotsList.filter(debot => debot.label.toLowerCase().startsWith(filterKey) || debot.address.startsWith(filterKey));
 
-	const renderDebotListItems = () => debotsList.map((debot, index) => (
+	const renderDebotListItems = () => filteredDebots.map((debot, index) => (
 		<DebotListItem
 			isGrey={index % 2 === 0 || index === 0}
 			debot={debot}
@@ -19,7 +23,7 @@ const DebotsList = () => {
 		/>
 	));
 
-	const renderLocalDebotListItems = () => localDebotsList.map((debot, index) => (
+	const renderLocalDebotListItems = () => filteredLocalDebots.map((debot, index) => (
 		<DebotListItem
 			isGrey={index % 2 === 0 || index === 0}
 			debot={debot}
@@ -34,10 +38,7 @@ const DebotsList = () => {
 
 	const renderSelectedItem = () => (
 		<div className='options-list__selected-item'>
-			<img
-				src={selectedNetwork === DEV_NETWORK ? '/dev-net-icon.png' : '/main-net-icon.png'}
-				alt='selected network'
-			/>
+			{selectedNetwork === DEV_NETWORK ? <DevNetIcon /> : <MainNetIcon />}
 			{selectedNetwork}
 		</div>
 	)
@@ -50,14 +51,14 @@ const DebotsList = () => {
 						className='options-list__list-item'
 						onClick={() => handleSelectNetwork(MAIN_NETWORK)}
 					>
-						<img src='/main-net-icon.png' alt='main-net' />
+						<MainNetIcon />
 						{MAIN_NETWORK}
 					</div>
 					<div
 						className='options-list__list-item'
 						onClick={() => handleSelectNetwork(DEV_NETWORK)}
 					>
-						<img src='/dev-net-icon.png' alt='dev-net' />
+						<DevNetIcon />
 						{DEV_NETWORK}
 					</div>
 				</OptionsList>
@@ -68,19 +69,19 @@ const DebotsList = () => {
 					<Environment />
 				</ControlWithPopup>
 			</div>
-			{!!localDebotsList.length
+			{!!filteredLocalDebots.length
 				&& <Fragment>
 					<div className='debots-list__section-title'>Your saved DeBots</div>
 					{renderLocalDebotListItems()}
 				</Fragment>
 			}
-			{!!debotsList.length
+			{!!filteredDebots.length
 				&& <Fragment>
 					<div className='debots-list__section-title'>Suggested DeBots</div>
 					{renderDebotListItems()}
 				</Fragment>
 			}
-			{(!debotsList.length && !localDebotsList.length) && <Loader isFailed />}
+			{(!filteredDebots.length && !filteredLocalDebots.length) && <Loader isFailed />}
 		</div>
 	);
 }

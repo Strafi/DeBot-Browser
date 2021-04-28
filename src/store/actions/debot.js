@@ -2,7 +2,7 @@ export const PUSH_ITEM_TO_STAGE = 'debot/PUSH_ITEM_TO_STAGE';
 export const CLEAR_STAGE = 'debot/CLEAR_STAGE';
 export const SET_SIGNING_BOX = 'debot/SET_SIGNING_BOX';
 export const SET_APPROVE_WINDOW = 'debot/SET_APPROVE_WINDOW';
-export const FILTER_DEBOTS_LIST_BY_NAME = 'debot/FILTER_DEBOTS_LIST_BY_NAME';
+export const SET_DEBOTS_FILTER_KEY = 'debot/SET_DEBOTS_FILTER_KEY';
 export const SET_LOCAL_DEBOTS_LIST = 'debot/SET_LOCAL_DEBOTS_LIST';
 
 export const pushItemToStage = item => dispatch => {
@@ -30,9 +30,9 @@ export const setApproveWindow = approveWindowInfo => dispatch => {
 	})
 }
 
-export const filterDebotsListByName = filterValue => dispatch => {
+export const setDebotsFilterKey = filterValue => dispatch => {
 	dispatch({
-		type: FILTER_DEBOTS_LIST_BY_NAME,
+		type: SET_DEBOTS_FILTER_KEY,
 		payload: filterValue,
 	})
 }

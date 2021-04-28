@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { createDebotUrl, checkIsValidAddress } from 'src/helpers';
-import { filterDebotsListByName } from 'src/store/actions/debot';
+import { setDebotsFilterKey } from 'src/store/actions/debot';
 import { LensIcon } from 'src/components/icons';
 import './index.scss';
 
@@ -17,12 +17,12 @@ const SearchBar = () => {
 
 		if (isValidAddress) {
 			const debotUrl = createDebotUrl(inputValue);
-			dispatch(filterDebotsListByName(''));
+			dispatch(setDebotsFilterKey(''));
 
 			return history.push(debotUrl);
 		}
 
-		dispatch(filterDebotsListByName(inputValue));
+		dispatch(setDebotsFilterKey(inputValue));
 	}
 
 	const handleKeyPress = event => {

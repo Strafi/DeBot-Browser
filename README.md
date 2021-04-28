@@ -2,7 +2,7 @@
 [] Flow from contest document works
 [x] Local DeBots
 [x] Environment
-[] Select network
+[x] Select network
 [x] PWA
 [] EXTRA: Syntax to paste items from Environment
 

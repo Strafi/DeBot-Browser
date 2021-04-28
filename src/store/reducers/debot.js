@@ -3,18 +3,20 @@ import {
 	CLEAR_STAGE,
 	SET_SIGNING_BOX,
 	SET_APPROVE_WINDOW,
-	FILTER_DEBOTS_LIST_BY_NAME,
+	SET_DEBOTS_FILTER_KEY,
 	SET_LOCAL_DEBOTS_LIST,
 } from '../actions/debot';
-import { USER_DEBOTS_LS_FIELD } from 'src/constants';
+import { USER_DEBOTS_LS_FIELD, MAIN_NETWORK, DEV_NETWORK } from 'src/constants';
 
 const initialState = {
 	stage: [],
 	signingBox: null,
 	approveWindow: null,
+	filterKey: '',
 	debotsList: [
-		{ title: 'TIP-3 DeBot', address: '0:81c12c2f4514124536aafea59db7df0262d3af877b4477afe6514bbc5bc9f317' },
-		{ title: 'SMV DeBot (RSquad)', address: '0:2a92e3d01c530697a0ec3ab5c3494474faa7ea0af5fa30d4ed508115bc9957a7' },
+		{ title: 'TIP-3 DeBot', address: '0:81c12c2f4514124536aafea59db7df0262d3af877b4477afe6514bbc5bc9f317', network: MAIN_NETWORK },
+		{ title: 'TIP-3 DeBot', address: '0:81c12c2f4514124536aafea59db7df0262d3af877b4477afe6514bbc5bc9f317', network: DEV_NETWORK },
+		{ title: 'SMV DeBot (RSquad)', address: '0:2a92e3d01c530697a0ec3ab5c3494474faa7ea0af5fa30d4ed508115bc9957a7', network: DEV_NETWORK },
 	],
 	localDebotsList: JSON.parse(localStorage.getItem(USER_DEBOTS_LS_FIELD)) || [],
 }
@@ -53,13 +55,12 @@ function reducer(state = initialState, action) {
 			}
 		}
 
-		case FILTER_DEBOTS_LIST_BY_NAME: {
-			const searchKey = payload.toLowerCase();
-			const debotsList = initialState.debotsList.filter(debot => debot.title.toLowerCase().startsWith(searchKey));
+		case SET_DEBOTS_FILTER_KEY: {
+			const filterKey = payload.toLowerCase();
 
 			return {
 				...state,
-				debotsList,
+				filterKey,
 			}
 		}
 
