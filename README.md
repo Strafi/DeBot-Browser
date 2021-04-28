@@ -9,4 +9,5 @@ Clone the repository using git and navigate into it. Then, depending on which pa
 Depending on which package manager you had installed, execute `yarn serve` or `npm run serve`. This command will run a local server with your own DeBot Browser. 
 
 ### Build from source
-Depending on which package manager you had installed, execute `yarn build` or `npm run build`. This command will create a new build (it will appear in the 'build' folder) that you can deploy to any hosting you wish. Also, you can deploy it locally using `yarn serve` or `npm run serve`.
+Depending on which package manager you had installed, execute `yarn build` or `npm run build`. This command will create a new build (it will appear in the 'build' folder) that you can deploy to any hosting you wish. Also, you can deploy it locally using `yarn serve` or `npm run serve`.  
+`yarn start` or `npm start` command is a shortcut to create a new build and then deploy it locally (build + serve).
