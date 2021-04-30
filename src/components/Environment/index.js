@@ -76,9 +76,14 @@ const Environment = () => {
 						{renderVariablesTableItems()}
 					</div>
 					: <div className='environment__image'>
-						<img src='/env-icon.svg' alt='Environment'/>
 						<div className='environment__image-text'>
-							Here you can store something to use it later (address or public key, for example).
+							Here you can store something to use later (address or public key, for example).
+						</div>
+						<div className='environment__image--flex-container'>
+							<img src='/env-icon.svg' alt='Environment'/>
+							<div className='environment__image-text'>
+								You can access stored data as variables in inputs by adding the '$' prefix to key, or copy data to the clipboard by click on it.
+							</div>
 						</div>
 						<div className='environment__image-text environment__image-text--warning'>
 							This storage is not encrypted, so you should not store private keys or seed-phrase here.

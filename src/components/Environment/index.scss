@@ -1,5 +1,6 @@
 @import '../../styles/colors.scss';
 @import '../../styles/mixins.scss';
+@import '../../styles/size.scss';
 
 .environment {
 	padding: 12px 14px 12px 14px;
@@ -106,10 +107,20 @@
 		align-items: center;
 		margin-bottom: 20px;
 
+		&--flex-container {
+			display: flex;
+			align-items: center;
+			margin-bottom: 20px;
+		}
+
 		img {
-			max-width: 170px;
-			max-height: 170px;
-			margin: 14px 0;
+			max-width: 120px;
+			max-height: 120px;
+			margin-right: 30px;
+
+			@media (max-width: #{$extra-min-checkpoint}) {
+				display: none;
+			}
 		}
 
 		&-text {
