@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import tonClientController from 'src/tonClient';
 import { addLocalDebot } from 'src/helpers';
 import { ControlWithPopupContext } from 'src/contexts';
@@ -17,7 +17,7 @@ const AddDebot = ({ prefilledAddress = '' }) => {
 
 	const handleLabelChange = e => setDebotName(e.target.value);
 
-	const handleAddDebot = () => {
+	const handleAddDebot = useCallback(() => {
 		if (debotName && debotAddress) {
 			const debotObj = {
 				title: debotName,
@@ -30,7 +30,22 @@ const AddDebot = ({ prefilledAddress = '' }) => {
 			if (popupContext)
 				popupContext.closePopup();
 		}
-	};
+	}, [debotAddress, debotName, popupContext, selectedNetwork]);
+
+	const handlePressOnEnter = useCallback(event => {
+		const { shiftKey, key, altKey } = event;
+		const isEnter = key === 'Enter';
+		const shouldHandle = isEnter && !shiftKey && !altKey;
+
+		if (shouldHandle)
+			handleAddDebot();
+	}, [handleAddDebot]);
+
+	useEffect(() => {
+		document.addEventListener('keypress', handlePressOnEnter);
+
+		return () => document.removeEventListener('keypress', handlePressOnEnter)
+	}, [handlePressOnEnter]);
 
 	const renderSelectedItem = () => (
 		<div className='options-list__selected-item'>

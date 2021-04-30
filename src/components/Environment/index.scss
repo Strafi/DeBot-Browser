@@ -63,9 +63,8 @@
 			&--cancel {
 				display: flex;
 				justify-content: center;
-				align-items: center;
 				width: 3%;
-				padding: 0;
+				padding: 11px 0 0 0;
 				border-right: 1px dashed $grey;
 
 				.cancel-icon {

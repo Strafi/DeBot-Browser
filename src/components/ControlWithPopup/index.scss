@@ -12,6 +12,7 @@
 		color: $blue;
 		cursor: pointer;
 		transition: color .2s;
+		user-select: none;
 
 		&:hover {
 			color: $light-blue;

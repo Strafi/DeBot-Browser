@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { addEnvVariable, removeEnvVariable, isCustomScrollBar } from 'src/helpers';
 import { CancelIcon } from 'src/components/icons';
@@ -15,19 +15,34 @@ const Environment = () => {
 
 	const handleValueChange = e => setEnvValue(e.target.value);
 
-	const handleAddVariable = () => {
+	const handleAddVariable = useCallback(() => {
 		if (envKey && envValue) {
 			addEnvVariable(envKey, envValue);
 			setEnvKey('');
 			setEnvValue('');
 		}
-	};
+	}, [envKey, envValue]);
 
 	const handleRemoveVariable = (e, key) => {
 		e.stopPropagation();
 		
 		removeEnvVariable(key);
 	}
+
+	const handlePressOnEnter = useCallback(event => {
+		const { shiftKey, key, altKey } = event;
+		const isEnter = key === 'Enter';
+		const shouldHandle = isEnter && !shiftKey && !altKey;
+
+		if (shouldHandle)
+			handleAddVariable();
+	}, [handleAddVariable]);
+
+	useEffect(() => {
+		document.addEventListener('keypress', handlePressOnEnter);
+
+		return () => document.removeEventListener('keypress', handlePressOnEnter)
+	}, [handlePressOnEnter]);
 
 	const copyToClipboard = async value => {
 		try {
