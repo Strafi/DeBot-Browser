@@ -26,7 +26,7 @@ class DEngine {
 		const initParams = await this.debotModule.init({ address }, debotBrowser);
 
 		debotBrowser.setDebotParams(initParams);
-		this.storage.set(address, initParams);
+		this.storage.set(address, { ...initParams, browser: debotBrowser });
 
 		return initParams
 	}
@@ -43,11 +43,11 @@ class DEngine {
 
 	async callDebotFunction(debotAddress, interfaceAddress, functionId, input) {
 		const debotParams = this.storage.get(debotAddress);
-		const { debot_handle, debot_abi } = debotParams;
+		const { debot_handle, debot_abi, browser } = debotParams;
 
 		let call_set;
 
-		if (functionId) {
+		if (functionId && functionId !== '0') {
 			const functionName = formDebotFunctionFromId(functionId);
 
 			call_set = {
@@ -73,9 +73,13 @@ class DEngine {
 		try {
 			const sendRes = await this.debotModule.send({ debot_handle, message: encodedMessage.message });
 
+			browser.releaseInterfacesQueue();
+
 			return sendRes;
 		} catch(err) {
 			console.error(err);
+
+			browser.releaseInterfacesQueue();
 
 			store.dispatch(pushItemToStage({
 				text: err.message,
@@ -89,6 +93,11 @@ class DEngine {
 		store.dispatch(clearStage());
 		store.dispatch(setApproveWindow(null));
 		store.dispatch(setSigningBox(null));
+		
+		const debotParams = this.storage.get(address);
+		const { browser } = debotParams;
+
+		browser.clearInterfacesQueue();
 
 		return this.runDebot(address);
 	}

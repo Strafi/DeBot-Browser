@@ -12,6 +12,7 @@ class DebotBrowser {
 		this.debot_abi = null;
 		this.info = null;
 		this.deprecatedMessageTimeout = null;
+		this.interfacesQueue = [];
 	}
 
 	setDebotParams(params) {
@@ -20,6 +21,24 @@ class DebotBrowser {
 		this.debot_handle = debot_handle;
 		this.debot_abi = debot_abi;
 		this.info = info;
+	}
+
+	releaseInterfacesQueue() {
+		this.interfacesQueue.shift();
+
+		if (this.interfacesQueue.length) {
+			const interfaceState = this.interfacesQueue[0];
+			const { interfaceId, debotAddress, params } = interfaceState;
+
+			InterfacesController.delegateToInterface(interfaceId, {
+				debotAddress,
+				...params,
+			});
+		}
+	}
+
+	clearInterfacesQueue() {
+		this.interfacesQueue = [];
 	}
 
 	showDeprecatedMessage() {
@@ -87,6 +106,7 @@ class DebotBrowser {
 	}
 
 	async send(params) {
+		console.log('incomming message');
 		try {
 			const parsedMessage = await tonClientController.client.boc.parse_message({ boc: params.message })
 
@@ -94,16 +114,30 @@ class DebotBrowser {
 			const [, interfaceId] = dst.split(':');
 	
 			if (dst_workchain_id === DEBOT_WC) {
-				InterfacesController.delegateToInterface(interfaceId, {
+				this.interfacesQueue.push({
+					interfaceId,
 					debotAddress: src,
-					...params,
-				});
+					params,
+				})
+
+				if (this.interfacesQueue.length === 1) {
+					InterfacesController.delegateToInterface(interfaceId, {
+						debotAddress: src,
+						...params,
+					});
+				}
 			} else {
 				console.log('Call other debot', parsedMessage, params);
-				
-				const { debot_handle } = await DEngine.initDebot(dst);
 
-				await DEngine.debotModule.send({ debot_handle, message: params.message });
+				if (DEngine.storage.has(dst)) {
+					const { debot_handle } = DEngine.storage.get(dst);
+
+					await DEngine.debotModule.send({ debot_handle, message: params.message });
+				} else {
+					const { debot_handle } = await DEngine.initDebot(dst);
+
+					await DEngine.debotModule.send({ debot_handle, message: params.message });
+				}
 			}
 		} catch(err) {
 			console.error(err);

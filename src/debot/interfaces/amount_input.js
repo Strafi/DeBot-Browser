@@ -19,7 +19,7 @@ class AmountInput {
 		config.min = min;
 		config.max = max;
 
-		if (max && min && max < min) {
+		if (max && min && parseInt(max) < parseInt(min)) {
 			config.max = min;
 		}
 

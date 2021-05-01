@@ -15,9 +15,8 @@ const Text = ({ params }) => {
 				console.error(err);
 			}
 		};
-		
-		if (functionId && functionId !== '0')
-			runDebotFunction();
+
+		runDebotFunction();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

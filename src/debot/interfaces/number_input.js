@@ -15,11 +15,13 @@ class NumberInput {
 
 	get(params) {
 		const { answerId, prompt, max, min, ...config } = params.value;
+		
+		console.log(min, max);
 
 		config.min = min;
 		config.max = max;
 
-		if (max && min && max < min) {
+		if (max && min && parseInt(max) < parseInt(min)) {
 			config.max = min;
 		}
 
