@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useDebotAddress, encodeString } from 'src/helpers';
+import { useDebotAddress } from 'src/helpers';
 import { DEngine } from 'src/debot';
 
 function formStepFromDecimals(decimals) {
@@ -108,7 +108,7 @@ const AmountInput = ({
 				if (customCallback)
 					return customCallback(inputValue);
 
-				await DEngine.callDebotFunction(debotAddress, interfaceAddress, functionId, { value: encodeString(inputValue) });
+				await DEngine.callDebotFunction(debotAddress, interfaceAddress, functionId, { value: inputValue });
 			} catch(err) {
 				setErrorText(err.message);
 			}

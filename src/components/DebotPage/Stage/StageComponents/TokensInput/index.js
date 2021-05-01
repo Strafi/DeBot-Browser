@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDebotAddress, encodeString } from 'src/helpers';
+import { useDebotAddress } from 'src/helpers';
 import { DEngine } from 'src/debot';
 import { AmountInput } from '../';
 
@@ -16,7 +16,7 @@ const TokensInput = ({ params }) => {
 		try {
 			const nanotokens = convertToNanotokens(inputValue);
 
-			await DEngine.callDebotFunction(debotAddress, interfaceAddress, functionId, { value: encodeString(nanotokens) });
+			await DEngine.callDebotFunction(debotAddress, interfaceAddress, functionId, { value: nanotokens });
 		} catch(err) {
 			setErrorText(err.message);
 		}
