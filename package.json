@@ -44,7 +44,6 @@
 	"predeploy": "npm run build",
 	"deploy": "gh-pages -d build"
   },
-  "homepage": "http://strafi.github.io/Free-TON-DeBot-Browser",
   "eslintConfig": {
     "extends": [
       "react-app",
