@@ -2,6 +2,15 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useDebotAddress } from 'src/helpers';
 import { DEngine } from 'src/debot';
 
+const normalizeValue = (value, power) => {
+	if (!power || power === "0")
+		return value;
+
+	const numPower = parseInt(power);
+
+	return (parseFloat(value) * Math.pow(10, numPower)).toString();
+}
+
 function formStepFromDecimals(decimals) {
 	if (!decimals || decimals === "0")
 		return '1';
@@ -20,9 +29,9 @@ function formStepFromDecimals(decimals) {
 
 function formDescription(config) {
 	if (config.min && config.max)
-		return `Input value must be greater than ${config.min} and less than (or equal) ${config.max}`;
+		return `Input value must be greater than (or equal) ${config.min} and less than (or equal) ${config.max}`;
 	else if (config.min)
-		return `Input value must be greater than ${config.min}`;
+		return `Input value must be greater than (or equal) ${config.min}`;
 	else if (config.max)
 		return `Input value must be less than (or equal) ${config.max}`;
 	else
@@ -67,6 +76,7 @@ const AmountInput = ({
 		if (!config.decimals || config.decimals === "0") {
 			if (value.includes('.')) {
 				setErrorText('This input does not support decimals');
+				setInputValue(event.target.value);
 
 				return;
 			}
@@ -75,6 +85,7 @@ const AmountInput = ({
 
 			if (decimalsString && parseInt(config.decimals) < decimalsString.length) {
 				setErrorText('Too many decimals');
+				setInputValue(event.target.value);
 
 				return;
 			}
@@ -88,30 +99,38 @@ const AmountInput = ({
 		} else if (isOutOfRange) {
 			setErrorText(description);
 		} else {
-			setInputValue(event.target.value);
 			setErrorText('');
 
 			if (setCustomErrorText)
 				setCustomErrorText('');
 		}
+
+		setInputValue(event.target.value);
 	}
 
-	const handleKeyPress = async event => {
+	const handleSend = async () => {
+		if (errorText || customErrorText || !inputValue)
+			return;
+
+		try {
+			if (customCallback)
+				return customCallback(inputValue);
+
+			await DEngine.callDebotFunction(debotAddress, interfaceAddress, functionId, { value: normalizeValue(inputValue, config.decimals) });
+		} catch(err) {
+			setErrorText(err.message);
+		}
+	}
+
+	const handleKeyPress = event => {
 		const { shiftKey, key, altKey } = event;
 		const isEnter = key === 'Enter';
-		const shouldTriggerFunction = isEnter && !shiftKey && !altKey && !errorText && inputValue;
+		const shouldTriggerFunction = isEnter && !shiftKey && !altKey;
 
 		if (shouldTriggerFunction) {
 			event.preventDefault();
 
-			try {
-				if (customCallback)
-					return customCallback(inputValue);
-
-				await DEngine.callDebotFunction(debotAddress, interfaceAddress, functionId, { value: inputValue });
-			} catch(err) {
-				setErrorText(err.message);
-			}
+			handleSend();
 		}
 	}
 
@@ -121,17 +140,20 @@ const AmountInput = ({
 		<div className='stage-component__input-container'>
 			{!!text && <span className='stage-component__input-label'>{text}</span>}
 			{!!description && <div className='stage-component__input-description'>{description}</div>}
-			<input
-				className={inputClassName}
-				type='number'
-				placeholder='Enter...'
-				value={inputValue}
-				onChange={handleInputChange}
-				onKeyPress={handleKeyPress}
-				ref={inputRef}
-				{...inputConfig}
-			/>
-			{errorText && <span className='stage-component__input-error'>{errorText}</span>}
+			<div className='stage-component__input-flex'>
+				<input
+					className={inputClassName}
+					type='number'
+					placeholder='Enter...'
+					value={inputValue}
+					onChange={handleInputChange}
+					onKeyPress={handleKeyPress}
+					ref={inputRef}
+					{...inputConfig}
+				/>
+				<div className='stage-component__input-send-button' onClick={handleSend}>Send</div>
+			</div>
+			{!!errorText && <span className='stage-component__input-error'>{errorText}</span>}
 			{!!customErrorText && <span className='stage-component__input-error'>{customErrorText}</span>}
 		</div>
 	)

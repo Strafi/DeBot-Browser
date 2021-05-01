@@ -29,25 +29,31 @@ const Input = ({
 			setCustomErrorText('');
 	}
 
-	const handleKeyPress = async event => {
+	const handleSend = async () => {
+		if (errorText || customErrorText || !inputValue)
+			return;
+
+		try {
+			if (customCallback)
+				return customCallback(inputValue);
+
+			const value = getEnvVariableFromInput(inputValue) || inputValue;
+
+			await DEngine.callDebotFunction(debotAddress, interfaceAddress, functionId, { value: encodeString(value) });
+		} catch(err) {
+			setErrorText(err.message);
+		}
+	}
+
+	const handleKeyPress = event => {
 		const { shiftKey, key, altKey } = event;
 		const isEnter = key === 'Enter';
 		const isSendKeyPressed = isEnter && !shiftKey && !altKey;
-		const shouldTriggerFunction = isSendKeyPressed && !errorText && inputValue && !customErrorText;
 
-		if (shouldTriggerFunction) {
+		if (isSendKeyPressed) {
 			event.preventDefault();
 
-			try {
-				if (customCallback)
-					return customCallback(inputValue);
-
-				const value = getEnvVariableFromInput(inputValue) || inputValue;
-
-				await DEngine.callDebotFunction(debotAddress, interfaceAddress, functionId, { value: encodeString(value) });
-			} catch(err) {
-				setErrorText(err.message);
-			}
+			handleSend();
 		}
 	}
 
@@ -56,26 +62,30 @@ const Input = ({
 	return (
 		<div className='stage-component__input-container'>
 			{!!text && <span className='stage-component__input-label'>{text}</span>}
-			{isMultiline
-				? <textarea
-					className={inputClassName}
-					type={type}
-					placeholder='Enter...'
-					value={inputValue}
-					onChange={handleInputChange}
-					onKeyPress={handleKeyPress}
-					ref={inputRef}
-				></textarea>
-				: <input
-					className={inputClassName}
-					type={type}
-					placeholder='Enter...'
-					value={inputValue}
-					onChange={handleInputChange}
-					onKeyPress={handleKeyPress}
-					ref={inputRef}
-				/>
-			}
+			<div className='stage-component__input-flex'>
+				{isMultiline
+					? <textarea
+						className={inputClassName}
+						type={type}
+						placeholder='Enter...'
+						value={inputValue}
+						onChange={handleInputChange}
+						onKeyPress={handleKeyPress}
+						ref={inputRef}
+					></textarea>
+					: <input
+						className={inputClassName}
+						autoComplete="off"
+						type={type}
+						placeholder='Enter...'
+						value={inputValue}
+						onChange={handleInputChange}
+						onKeyPress={handleKeyPress}
+						ref={inputRef}
+					/>
+				}
+				<div className='stage-component__input-send-button' onClick={handleSend}>Send</div>
+			</div>
 			{!!errorText && <span className='stage-component__input-error'>{errorText}</span>}
 			{!!customErrorText && <span className='stage-component__input-error'>{customErrorText}</span>}
 		</div>

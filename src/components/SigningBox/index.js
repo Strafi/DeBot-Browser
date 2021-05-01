@@ -51,6 +51,7 @@ const SigningBox = () => {
 	const handleDrop = e => {
 		preventEvent(e);
 		setIsDropable(false);
+		setIsUploadError(false);
 		const { files } = e.dataTransfer;
 
 		if (files && files.length > 1)

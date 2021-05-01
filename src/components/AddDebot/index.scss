@@ -40,4 +40,10 @@
 		
 		@include export-button-effects($dark-green, $white);
 	}
+
+	.stage-component__input {
+		&:last-child {
+			margin-bottom: 20px;
+		}
+	}
 }

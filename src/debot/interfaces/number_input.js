@@ -14,7 +14,14 @@ class NumberInput {
 	}
 
 	get(params) {
-		const { answerId, prompt, ...config } = params.value;
+		const { answerId, prompt, max, min, ...config } = params.value;
+
+		config.min = min;
+		config.max = max;
+
+		if (max && min && max < min) {
+			config.max = min;
+		}
 
 		const decodedPrompt = decodeString(prompt);
 		const stageObject = {
