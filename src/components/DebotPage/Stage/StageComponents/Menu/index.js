@@ -3,7 +3,7 @@ import { useDebotAddress } from 'src/helpers';
 import { DEngine } from 'src/debot';
 import './index.scss';
 
-const MAX_ITEMS = 7;
+const MAX_ITEMS = 8;
 
 const Menu = ({ params }) => {
 	const debotAddress = useDebotAddress();

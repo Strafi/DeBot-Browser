@@ -106,7 +106,6 @@ class DebotBrowser {
 	}
 
 	async send(params) {
-		console.log('incomming message');
 		try {
 			const parsedMessage = await tonClientController.client.boc.parse_message({ boc: params.message })
 
