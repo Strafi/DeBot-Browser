@@ -43,6 +43,15 @@
 		}
 	}
 
+	&__list {
+		overflow-x: auto;
+		height: $debot-list-height;
+
+		@media(max-width: #{$min-checkpoint}) {
+			height: $debot-list-height-min;
+		}
+	}
+
 	&__item {
 		display: inline-block;
 		width: 100%;
