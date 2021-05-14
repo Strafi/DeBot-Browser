@@ -2,8 +2,8 @@ $main-wrapper-max-width: 1050px;
 $stage-max-width: 850px;
 $options-switcher-width: 245px;
 
-$app-top-padding: 40px;
-$header-height: 120px;
+$app-top-padding: 30px;
+$header-height: 36px;
 $header-margin: 50px;
 $debot-page-controls-height: 40px;
 $debot-page-controls-margin: 10px;
@@ -12,7 +12,8 @@ $stage-height: calc(100vh - #{$app-top-padding} - #{$app-top-padding} - #{$heade
 $min-checkpoint: 643px;
 $app-bottom-padding-min: 10px;
 $header-margin-min: 20px;
-$header-height-min: 176px;
+$header-height-min: 36px;
+$debot-list-controls-height-min: 65px;
 $debot-page-controls-height-min: 110px;
 $debot-page-controls-margin-min: 20px;
 $stage-height-min: calc(100vh - #{$app-top-padding} - #{$app-bottom-padding-min} - #{$header-height-min} - #{$header-margin-min} - #{$debot-page-controls-height-min} - #{$debot-page-controls-margin-min});

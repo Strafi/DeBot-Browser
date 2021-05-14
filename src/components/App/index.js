@@ -6,8 +6,8 @@ import './index.scss';
 const App = () => {
 	return (
 		<div className='app-container'>
+			<Header />
 			<div className='app-container__flex-wrapper'>
-				<Header />
 				<Switch>
 					<Route exact path='/' component={DebotsList} />
 					<Route path='/debot' component={DebotPage} />

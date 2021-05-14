@@ -5,7 +5,7 @@ import './index.scss';
 const DEFAULT_HEIGHT = 252;
 const DEFAULT_WIDTH = 245;
 
-const OptionsList = ({ children, selectedItem, height = DEFAULT_HEIGHT, width = DEFAULT_WIDTH }) => {
+const OptionsList = ({ children, selectedItem, height = DEFAULT_HEIGHT, width = DEFAULT_WIDTH, isDisabled }) => {
 	const switcherBlockRef = useRef(null);
 	const [isListOpen, setIsListOpen] = useState(false);
 
@@ -28,12 +28,12 @@ const OptionsList = ({ children, selectedItem, height = DEFAULT_HEIGHT, width = 
 
 	const switcherBlockClassName = `options-list ${isListOpen
 		? 'options-list--active' : ''
-	}`;
+	} ${isDisabled ? 'options-list--disabled' : ''}`;
 
 	return (
 		<div
 			ref={switcherBlockRef}
-			onClick={() => setIsListOpen(!isListOpen)}
+			onClick={() => !isDisabled && setIsListOpen(!isListOpen)}
 			className={switcherBlockClassName}
 			style={{ '--width': `${width}px` }}
 		>

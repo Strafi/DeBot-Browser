@@ -3,13 +3,16 @@ import React from 'react';
 const BackIcon = () => (
 	<svg
 		className='back-icon'
-		width='20'
-		height='20'
-		viewBox='0 0 20 20'
-		fill='none'
-		xmlns='http://www.w3.org/2000/svg'
+		xmlns="http://www.w3.org/2000/svg"
+		width="24px"
+		height="24px"
+		viewBox="0 0 24 24"
 	>
-		<path d='M11.0156 2L3.00018 10.0154L11.0156 18.0309' stroke='#5287C3' strokeWidth='3'/>
+		<path 
+			fill="currentColor"
+			fillRule="evenodd"
+			d="M12 4l1.41 1.41L7.83 11H20v2H7.83l5.58 5.59L12 20l-8-8z">
+		</path>
 	</svg>
 )
 

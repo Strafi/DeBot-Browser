@@ -34,6 +34,11 @@
 		}
 	}
 
+	&--disabled {
+		opacity: 0.4;
+		cursor: default;
+	}
+
 	&:not(.options-list__switch-block--active):hover {
 		background-color: $dark-grey;
 	}

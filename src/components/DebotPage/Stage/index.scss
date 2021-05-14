@@ -18,8 +18,4 @@
 			padding: 0 15px 0 0;
 		}
 	}
-
-	@media (max-width: 357px) {
-		height: calc(#{$stage-height-min} - 57px);
-	}
 }
