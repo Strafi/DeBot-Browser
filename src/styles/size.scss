@@ -11,7 +11,7 @@ $debot-list-height: calc(100vh - #{$app-top-padding} - #{$app-top-padding} - #{$
 $stage-height: calc(100vh - #{$app-top-padding} - #{$app-top-padding} - #{$header-height} - #{$header-margin} - #{$debot-page-controls-height} - #{$debot-page-controls-margin});
 
 $min-checkpoint: 643px;
-$app-bottom-padding-min: 10px;
+$app-bottom-padding-min: 30px;
 $header-margin-min: 20px;
 $header-height-min: 36px;
 $debot-list-controls-height-min: 65px;
