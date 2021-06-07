@@ -15,9 +15,14 @@ if (isCustomScrollBar()) {
 	document.querySelector('body')?.classList.add('with-custom-scrollbar');
 }
 
+const routerParams = {};
+
+if (process.env.REACT_APP_ROUTER_BASENAME)
+	routerParams.basename = `/${process.env.REACT_APP_ROUTER_BASENAME}`;
+
 ReactDOM.render(
 	<Provider store={store}>
-		<BrowserRouter>
+		<BrowserRouter { ...routerParams }>
 			<App />
 		</BrowserRouter>
 	</Provider>,
