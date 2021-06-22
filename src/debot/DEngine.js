@@ -5,6 +5,7 @@ import { formDebotFunctionFromId } from 'src/helpers';
 import { COMPONENTS_BINDINGS, DEV_NETWORK } from 'src/constants';
 import { pushItemToStage, clearStage, setApproveWindow, setSigningBox } from 'src/store/actions/debot';
 import DebotBrowser from './DebotBrowser';
+import InterfacesController from './interfaces';
 
 class DEngine {
 	constructor() {
@@ -34,7 +35,12 @@ class DEngine {
 	async runDebot(address) {
 		const initParams = await this.initDebot(address);
 
-		const { debot_handle } = initParams;
+		const { debot_handle, info: { interfaces } } = initParams;
+
+		const isDebotSupported = InterfacesController.checkAreInterfacesSupported(interfaces);
+
+		if (!isDebotSupported)
+			return this.showUnsupportedMessage();
 
 		await this.debotModule.start({ debot_handle });
 
@@ -100,6 +106,15 @@ class DEngine {
 		browser.clearInterfacesQueue();
 
 		return this.runDebot(address);
+	}
+
+	showUnsupportedMessage() {
+		const stageObject = {
+			text: 'This DeBot is not yet supported by our browser :(\nTry another browser for now and come back to us later',
+			component: COMPONENTS_BINDINGS.TEXT,
+		};
+		
+		store.dispatch(pushItemToStage(stageObject));
 	}
 }
 

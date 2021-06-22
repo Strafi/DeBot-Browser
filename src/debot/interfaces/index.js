@@ -30,6 +30,17 @@ class InterfacesController {
 		]);
 	}
 
+	checkAreInterfacesSupported(interfaces) {
+		for (const interfaceAddress of interfaces) {
+			const interfaceId = interfaceAddress.slice(2);
+
+			if (!this.state.has(interfaceId))
+				return false;
+		}
+
+		return true;
+	}
+
 	delegateToInterface(interfaceId, params) {
 		const _interface = this.state.get(interfaceId);
 
