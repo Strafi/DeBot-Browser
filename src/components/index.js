@@ -1,4 +1,5 @@
 export { default as App } from './App';
+export { default as AddAccount } from './AddAccount';
 export { default as Header } from './Header';
 export { default as SearchBar } from './SearchBar';
 export { default as DebotsList } from './DebotsList';

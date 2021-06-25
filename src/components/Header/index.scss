@@ -58,18 +58,31 @@
 	}
 
 	&__settings-bar {
+		display: flex;
+		align-items: center;
 		padding-left: 12px;
 
 		.options-list {
+			justify-content: center;
 			height: $header-height;
-			width: max-content;
-			min-width: max-content;
-			padding: 0 8px;
+			width: 36px;
+			min-width: 36px;
+			margin-left: 8px;
+			padding: 0;
 			border-radius: 50%;
 
 			&__list {
 				left: auto;
 				right: 0;
+
+				&-item {
+					position: relative;
+					text-align: center;
+				}
+			}
+
+			&:first-child {
+				margin-left: 0px;
 			}
 	
 			.arrow-icon {
@@ -79,6 +92,34 @@
 			.network-icon {
 				margin: 0;
 			}
+
+			.selected-text-item {
+				font-size: 22px;
+    			line-height: 22px;
+				font-weight: 600;
+			}
+
+			.header-container__add-account-button {
+				margin: 4px 0 8px;
+				text-align: center;
+			}
+		}
+	}
+
+	&__add-account-button {
+		margin-left: 8px;
+		font-weight: 600;
+		font-size: 16px;
+		color: $blue;
+		cursor: pointer;
+		transition: color .2s;
+
+		&:hover {
+			color: $light-blue;
+		}
+
+		&:active {
+			color: $dark-blue;
 		}
 	}
 }

@@ -55,7 +55,7 @@ class Menu {
 					return this.select(extendedParams);
 
 				default:
-					throw new Error('Function does not exist on interface: Menu');
+					throw new Error(`Function does not exist on interface: ${this.constructor.name}`);
 			}
 		} catch (err) {
 			console.error('Interface execution failed: ', err);

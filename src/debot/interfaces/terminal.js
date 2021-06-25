@@ -125,7 +125,7 @@ class Terminal {
 					return this.print(extendedParams);
 
 				default:
-					throw new Error('Function does not exist on interface: Terminal');
+					throw new Error(`Function does not exist on interface: ${this.constructor.name}`);
 			}
 		} catch (err) {
 			console.error('Interface execution failed: ', err);

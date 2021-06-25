@@ -6,6 +6,7 @@ import AddressInput from './address_input';
 import NumberInput from './number_input';
 import Echo from './echo';
 import Stdout from './stdout';
+import Userinfo from './userinfo';
 
 class InterfacesController {
 	constructor() {
@@ -17,6 +18,7 @@ class InterfacesController {
 		const numberInput = new NumberInput();
 		const echo = new Echo();
 		const stdout = new Stdout();
+		const userinfo = new Userinfo();
 
 		this.state = new Map([
 			[terminal.id, terminal],
@@ -27,6 +29,7 @@ class InterfacesController {
 			[numberInput.id, numberInput],
 			[echo.id, echo],
 			[stdout.id, stdout],
+			[userinfo.id, userinfo],
 		]);
 	}
 

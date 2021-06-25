@@ -6,3 +6,5 @@ export { default as ADDRESS_INPUT_ABI } from './address_input.abi';
 export { default as NUMBER_INPUT_ABI } from './number_input.abi';
 export { default as ECHO_ABI } from './echo.abi';
 export { default as STDOUT_ABI } from './stdout.abi';
+export { default as SIGNING_BOX_INPUT_ABI } from './signing_box_input.abi';
+export { default as USERINFO_ABI } from './userinfo.abi';

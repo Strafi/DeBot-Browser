@@ -6,6 +6,7 @@ export { default as createDebotUrl } from './createDebotUrl';
 export { default as createExplorerUrl } from './createExplorerUrl';
 export { default as checkIsValidAddress } from './checkIsValidAddress';
 export { default as formDebotFunctionFromId } from './formDebotFunctionFromId';
+export { default as generateRandomColor } from './generateRandomColor';
 export { default as genKeyPairFromMnemonic } from './genKeyPairFromMnemonic';
 export { default as getEnvVariableFromInput } from './getEnvVariableFromInput';
 export { default as removeLocalDebot } from './removeLocalDebot';
