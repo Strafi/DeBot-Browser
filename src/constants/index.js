@@ -30,6 +30,7 @@ const CHOSEN_ACCOUNT_LS_FIELD = 'CHOSEN_ACCOUNT_LS_FIELD';
 
 const MAIN_NETWORK = 'main.ton.dev';
 const DEV_NETWORK = 'net.ton.dev';
+const FLD_NETWORK = 'fld.ton.dev';
 
 module.exports = {
 	EXPLORER_BASE_URL,
@@ -46,4 +47,5 @@ module.exports = {
 	CHOSEN_ACCOUNT_LS_FIELD,
 	MAIN_NETWORK,
 	DEV_NETWORK,
+	FLD_NETWORK,
 }

@@ -81,16 +81,18 @@
 				}
 			}
 
+			&__selected-item {
+				.network-icon {
+					margin: 0;
+				}
+			}
+
 			&:first-child {
 				margin-left: 0px;
 			}
 	
 			.arrow-icon {
 				display: none;
-			}
-	
-			.network-icon {
-				margin: 0;
 			}
 
 			.selected-text-item {

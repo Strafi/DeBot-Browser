@@ -3,8 +3,8 @@ import tonClientController from 'src/tonClient';
 import { addLocalDebot } from 'src/helpers';
 import { ControlWithPopupContext } from 'src/contexts';
 import { OptionsList } from 'src/components';
-import { MainNetIcon, DevNetIcon } from 'src/components/icons';
-import { MAIN_NETWORK, DEV_NETWORK } from 'src/constants';
+import { MainNetIcon, DevNetIcon, FldNetIcon, NetworkIcon } from 'src/components/icons';
+import { MAIN_NETWORK, DEV_NETWORK, FLD_NETWORK } from 'src/constants';
 import './index.scss';
 
 const AddDebot = ({ prefilledAddress = '' }) => {
@@ -49,7 +49,7 @@ const AddDebot = ({ prefilledAddress = '' }) => {
 
 	const renderSelectedItem = () => (
 		<div className='options-list__selected-item'>
-			{selectedNetwork === DEV_NETWORK ? <DevNetIcon /> : <MainNetIcon />}
+			<NetworkIcon network={selectedNetwork} />
 			{selectedNetwork}
 		</div>
 	)
@@ -67,7 +67,7 @@ const AddDebot = ({ prefilledAddress = '' }) => {
 						onChange={handleLabelChange}
 					/>
 				</div>
-				<OptionsList selectedItem={renderSelectedItem()} height={84} width={200}>
+				<OptionsList selectedItem={renderSelectedItem()} height={126} width={200}>
 					<div
 						className='options-list__list-item'
 						onClick={() => setSelectedNetwork(MAIN_NETWORK)}
@@ -81,6 +81,13 @@ const AddDebot = ({ prefilledAddress = '' }) => {
 					>
 						<DevNetIcon />
 						{DEV_NETWORK}
+					</div>
+					<div
+						className='options-list__list-item'
+						onClick={() => setSelectedNetwork(FLD_NETWORK)}
+					>
+						<FldNetIcon />
+						{FLD_NETWORK}
 					</div>
 				</OptionsList>
 			</div>

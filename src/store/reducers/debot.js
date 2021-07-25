@@ -6,7 +6,7 @@ import {
 	SET_DEBOTS_FILTER_KEY,
 	SET_LOCAL_DEBOTS_LIST,
 } from '../actions/debot';
-import { USER_DEBOTS_LS_FIELD, DEV_NETWORK } from 'src/constants';
+import { USER_DEBOTS_LS_FIELD, MAIN_NETWORK } from 'src/constants';
 
 const initialState = {
 	stage: [],
@@ -14,8 +14,7 @@ const initialState = {
 	approveWindow: null,
 	filterKey: '',
 	debotsList: [
-		{ title: 'TIP-3 DeBot', address: '0:81c12c2f4514124536aafea59db7df0262d3af877b4477afe6514bbc5bc9f317', network: DEV_NETWORK },
-		{ title: 'SMV DeBot (RSquad)', address: '0:2a92e3d01c530697a0ec3ab5c3494474faa7ea0af5fa30d4ed508115bc9957a7', network: DEV_NETWORK },
+		{ title: 'DeNS', address: '0:c22300f9851e4fc9c246c3b605c521415407d95b272f0624a5e8f0d01ef25f27', network: MAIN_NETWORK },
 	],
 	localDebotsList: JSON.parse(localStorage.getItem(USER_DEBOTS_LS_FIELD)) || [],
 }

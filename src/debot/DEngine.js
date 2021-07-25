@@ -2,7 +2,7 @@ import store from 'src/store';
 import { DebotModule } from '@tonclient/core';
 import tonClientController from 'src/tonClient';
 import { formDebotFunctionFromId } from 'src/helpers';
-import { COMPONENTS_BINDINGS, DEV_NETWORK } from 'src/constants';
+import { COMPONENTS_BINDINGS, DEV_NETWORK, FLD_NETWORK } from 'src/constants';
 import { pushItemToStage, clearStage, setApproveWindow, setSigningBox } from 'src/store/actions/debot';
 import DebotBrowser from './DebotBrowser';
 import InterfacesController from './interfaces';
@@ -11,12 +11,16 @@ class DEngine {
 	constructor() {
 		this.mainDebotModule = new DebotModule(tonClientController.mainNetClient);
 		this.devDebotModule = new DebotModule(tonClientController.devNetClient);
+		this.fldDebotModule = new DebotModule(tonClientController.fldNetClient);
 		this.storage = new Map();
 	}
 
 	get debotModule() {
 		if (tonClientController.selectedNetwork === DEV_NETWORK)
 			return this.devDebotModule;
+
+		if (tonClientController.selectedNetwork === FLD_NETWORK)
+			return this.fldDebotModule;
 
 		return this.mainDebotModule;
 	}

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import tonClientController from 'src/tonClient';
-import { BackIcon, MainNetIcon, DevNetIcon, CancelIcon } from 'src/components/icons';
+import { BackIcon, MainNetIcon, DevNetIcon, FldNetIcon, NetworkIcon, CancelIcon } from 'src/components/icons';
 import { OptionsList } from 'src/components';
-import { MAIN_NETWORK, DEV_NETWORK } from 'src/constants';
+import { MAIN_NETWORK, DEV_NETWORK, FLD_NETWORK } from 'src/constants';
 import { removeAccount, selectAccount, setAddAccountModal } from 'src/store/actions/account';
 import SearchBar from '../SearchBar';
 import './index.scss';
@@ -27,7 +27,7 @@ const Header = () => {
 
 	const renderSelectedNetwork = () => (
 		<div className='options-list__selected-item'>
-			{selectedNetwork === DEV_NETWORK ? <DevNetIcon /> : <MainNetIcon />}
+			<NetworkIcon network={selectedNetwork} />
 		</div>
 	)
 
@@ -52,7 +52,7 @@ const Header = () => {
 			</Link>
 			<SearchBar />
 			<div className='header-container__settings-bar'>
-				<OptionsList selectedItem={renderSelectedNetwork()} height={84} width={200} isDisabled={!!match}>
+				<OptionsList selectedItem={renderSelectedNetwork()} height={126} width={200} isDisabled={!!match}>
 					<div
 						className='options-list__list-item'
 						onClick={() => handleSelectNetwork(MAIN_NETWORK)}
@@ -66,6 +66,13 @@ const Header = () => {
 					>
 						<DevNetIcon />
 						{DEV_NETWORK}
+					</div>
+					<div
+						className='options-list__list-item'
+						onClick={() => handleSelectNetwork(FLD_NETWORK)}
+					>
+						<FldNetIcon />
+						{FLD_NETWORK}
 					</div>
 				</OptionsList>
 				{accountsList?.length
