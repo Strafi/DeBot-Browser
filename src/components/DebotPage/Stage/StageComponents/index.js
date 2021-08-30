@@ -6,4 +6,5 @@ export { default as ConfirmInput } from './ConfirmInput';
 export { default as AddressInput } from './AddressInput';
 export { default as TokensInput } from './TokensInput';
 export { default as Menu } from './Menu';
+export { default as Media } from './Media';
 export { default as Stdout } from './Stdout';

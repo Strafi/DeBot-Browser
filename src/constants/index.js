@@ -12,6 +12,13 @@ const COMPONENTS_BINDINGS = {
 	TOKENS_INPUT: 'TokensInput',
 	MENU: 'Menu',
 	STDOUT: 'Stdout',
+	MEDIA: 'Media',
+}
+
+const MEDIA_STATUS = {
+    Success: 0,
+    UnsupportedMediaType: 1,
+    InvalidDataScheme: 2,
 }
 
 const EXPLORER_BASE_URL = 'https://ton.live/accounts/accountDetails?id=';
@@ -36,6 +43,7 @@ module.exports = {
 	EXPLORER_BASE_URL,
 	DB_CONTENT_TYPES,
 	COMPONENTS_BINDINGS,
+	MEDIA_STATUS,
 	DEBOT_ADDRESS_SEARCH_PARAM,
 	DEBOT_WC,
 	MNEMONIC_WORD_COUNT,

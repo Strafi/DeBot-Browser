@@ -1,4 +1,5 @@
 import Terminal from './terminal';
+import Media from './media';
 import Menu from './menu';
 import AmountInput from './amount_input';
 import ConfirmInput from './confirm_input';
@@ -19,9 +20,11 @@ class InterfacesController {
 		const echo = new Echo();
 		const stdout = new Stdout();
 		const userinfo = new Userinfo();
+		const media = new Media();
 
 		this.state = new Map([
 			[terminal.id, terminal],
+			[media.id, media],
 			[menu.id, menu],
 			[amountInput.id, amountInput],
 			[confirmInput.id, confirmInput],

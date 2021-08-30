@@ -13,6 +13,7 @@ import {
 	ConfirmInput,
 	TokensInput,
 	Menu,
+	Media,
 } from './StageComponents';
 import './index.scss';
 
@@ -29,6 +30,7 @@ class Stage extends Component {
 		[COMPONENTS_BINDINGS.TEXT]: Text,
 		[COMPONENTS_BINDINGS.STDOUT]: Stdout,
 		[COMPONENTS_BINDINGS.MENU]: Menu,
+		[COMPONENTS_BINDINGS.MEDIA]: Media,
 	}
 
 	formStageComponents = () => {
