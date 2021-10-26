@@ -1,7 +1,7 @@
 import {
 	SET_ENVIRONMENT_VARIABLE,
 } from '../actions/environment';
-import { USER_ENV_LS_FIELD } from 'src/constants';
+import { USER_ENV_LS_FIELD } from '/src/constants';
 
 const initialState = {
 	variables: JSON.parse(localStorage.getItem(USER_ENV_LS_FIELD)) || {},

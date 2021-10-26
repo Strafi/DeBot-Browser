@@ -1,6 +1,6 @@
 import { TonClient } from '@tonclient/core';
 import { libWeb } from '@tonclient/lib-web';
-import { TON_NETWORK_LS_FIELD, MAIN_NETWORK, DEV_NETWORK, FLD_NETWORK } from 'src/constants';
+import { TON_NETWORK_LS_FIELD, MAIN_NETWORK, DEV_NETWORK, FLD_NETWORK } from '/src/constants';
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
 TonClient.useBinaryLibrary(libWeb);

@@ -1,4 +1,4 @@
-import store from 'src/store';
+import store from '/src/store';
 
 function getEnvVariableFromInput(text) {
 	if (!text.startsWith('$'))

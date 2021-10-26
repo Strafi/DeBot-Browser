@@ -1,5 +1,5 @@
-import tonClientController from 'src/tonClient';
-import { MNEMONIC_WORD_COUNT, DERIVATION_PATH } from 'src/constants';
+import tonClientController from '/src/tonClient';
+import { MNEMONIC_WORD_COUNT, DERIVATION_PATH } from '/src/constants';
 
 async function genKeyPairFromMnemonic(mnemonic) {
 	const hdkMaster = await tonClientController.client.crypto.hdkey_xprv_from_mnemonic({

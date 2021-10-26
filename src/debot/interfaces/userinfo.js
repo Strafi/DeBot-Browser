@@ -1,10 +1,12 @@
-import store from 'src/store';
-import tonClientController from 'src/tonClient';
-import { encodeString } from 'src/helpers';
-import { DEBOT_WC } from 'src/constants';
-import { setAddAccountModal } from 'src/store/actions/account';
+import CrystallWalletProvider, { hasTonProvider } from 'ton-inpage-provider';
+
+import store from '/src/store';
+import tonClientController from '/src/tonClient';
+import { encodeString } from '/src/helpers';
+import { DEBOT_WC } from '/src/constants';
+import { setAddAccountModal } from '/src/store/actions/account';
 import { USERINFO_ABI } from '../ABIs';
-import { DEngine } from 'src/debot';
+import { DEngine } from '/src/debot';
 
 const ID = 'a56115147709ed3437efb89460b94a120b7fe94379c795d1ebb0435a847ee580';
 
@@ -14,7 +16,23 @@ class Userinfo {
 		this.abi = USERINFO_ABI;
 	}
 
-	_getAccountData(debotAddress, interfaceAddress, answerId, isPubkey) {
+	async _getAccountData(debotAddress, interfaceAddress, answerId, isPubkey) {
+		if (!(await hasTonProvider())) {
+			throw new Error('Crystall Wallet is not installed')
+		}
+
+		await CrystallWalletProvider.ensureInitialized();
+
+		const { accountInteraction } = await CrystallWalletProvider.rawApi.requestPermissions({
+			permissions: ['tonClient', 'accountInteraction']
+		});
+
+		if (accountInteraction == null) {
+			throw new Error('Insufficient permissions')
+		}
+
+		console.log(accountInteraction);
+
 		const { accountsList, chosenAccountAddress } = store.getState().account;
 
 		if (!accountsList?.length) {
@@ -37,7 +55,7 @@ class Userinfo {
 	async getAccount(params) {
 		const { value: { answerId }, debotAddress } = params;
 		const interfaceAddress = `${DEBOT_WC}:${this.id}`;
-		const accountData = this._getAccountData(debotAddress, interfaceAddress, answerId);
+		const accountData = await this._getAccountData(debotAddress, interfaceAddress, answerId);
 
 		if (accountData) {
 			try {

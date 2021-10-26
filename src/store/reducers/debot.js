@@ -6,7 +6,7 @@ import {
 	SET_DEBOTS_FILTER_KEY,
 	SET_LOCAL_DEBOTS_LIST,
 } from '../actions/debot';
-import { USER_DEBOTS_LS_FIELD, MAIN_NETWORK } from 'src/constants';
+import { USER_DEBOTS_LS_FIELD, MAIN_NETWORK } from '/src/constants';
 
 const initialState = {
 	stage: [],

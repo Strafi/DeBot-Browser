@@ -1,6 +1,6 @@
-import store from 'src/store';
-import { setEnvironmentVariables } from 'src/store/actions/environment';
-import { USER_ENV_LS_FIELD } from 'src/constants';
+import store from '/src/store';
+import { setEnvironmentVariables } from '/src/store/actions/environment';
+import { USER_ENV_LS_FIELD } from '/src/constants';
 
 function addEnvVariable(key, value) {
 	const envFromLS = JSON.parse(localStorage.getItem(USER_ENV_LS_FIELD)) || {};

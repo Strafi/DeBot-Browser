@@ -4,8 +4,8 @@ import {
 	REMOVE_ACCOUNT,
 	SET_ADD_ACCOUNT_MODAL,
 } from '../actions/account';
-import { ACCOUNTS_LIST_LS_FIELD, CHOSEN_ACCOUNT_LS_FIELD } from 'src/constants';
-import { generateRandomColor } from 'src/helpers';
+import { ACCOUNTS_LIST_LS_FIELD, CHOSEN_ACCOUNT_LS_FIELD } from '/src/constants';
+import { generateRandomColor } from '/src/helpers';
 
 const initialState = {
 	addAccountModal: null,

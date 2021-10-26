@@ -1,9 +1,9 @@
-import store from 'src/store';
-import tonClientController from 'src/tonClient';
-import { DEngine } from 'src/debot';
-import { COMPONENTS_BINDINGS, DEBOT_WC } from 'src/constants';
-import { pushItemToStage } from 'src/store/actions/debot';
-import { setSigningBox, setApproveWindow } from 'src/store/actions/debot';
+import store from '/src/store';
+import tonClientController from '/src/tonClient';
+import { DEngine } from '/src/debot';
+import { COMPONENTS_BINDINGS, DEBOT_WC } from '/src/constants';
+import { pushItemToStage } from '/src/store/actions/debot';
+import { setSigningBox, setApproveWindow } from '/src/store/actions/debot';
 import InterfacesController from './interfaces';
 
 class DebotBrowser {

@@ -1,8 +1,8 @@
-import store from 'src/store';
-import tonClientController from 'src/tonClient';
-import { decodeString } from 'src/helpers';
-import { COMPONENTS_BINDINGS, DEBOT_WC } from 'src/constants';
-import { pushItemToStage } from 'src/store/actions/debot';
+import store from '/src/store';
+import tonClientController from '/src/tonClient';
+import { decodeString } from '/src/helpers';
+import { COMPONENTS_BINDINGS, DEBOT_WC } from '/src/constants';
+import { pushItemToStage } from '/src/store/actions/debot';
 import { MENU_ABI } from '../ABIs';
 
 const ID = 'ac1a4d3ecea232e49783df4a23a81823cdca3205dc58cd20c4db259c25605b48';

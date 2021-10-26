@@ -39,7 +39,7 @@ const MAIN_NETWORK = 'main.ton.dev';
 const DEV_NETWORK = 'net.ton.dev';
 const FLD_NETWORK = 'fld.ton.dev';
 
-module.exports = {
+export {
 	EXPLORER_BASE_URL,
 	DB_CONTENT_TYPES,
 	COMPONENTS_BINDINGS,

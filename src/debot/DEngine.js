@@ -1,9 +1,9 @@
-import store from 'src/store';
+import store from '/src/store';
 import { DebotModule } from '@tonclient/core';
-import tonClientController from 'src/tonClient';
-import { formDebotFunctionFromId } from 'src/helpers';
-import { COMPONENTS_BINDINGS, DEV_NETWORK, FLD_NETWORK } from 'src/constants';
-import { pushItemToStage, clearStage, setApproveWindow, setSigningBox } from 'src/store/actions/debot';
+import tonClientController from '/src/tonClient';
+import { formDebotFunctionFromId } from '/src/helpers';
+import { COMPONENTS_BINDINGS, DEV_NETWORK, FLD_NETWORK } from '/src/constants';
+import { pushItemToStage, clearStage, setApproveWindow, setSigningBox } from '/src/store/actions/debot';
 import DebotBrowser from './DebotBrowser';
 import InterfacesController from './interfaces';
 
