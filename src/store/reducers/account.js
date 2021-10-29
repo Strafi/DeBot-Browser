@@ -1,69 +1,34 @@
 import {
-	ADD_ACCOUNT,
-	SELECT_ACCOUNT,
-	REMOVE_ACCOUNT,
-	SET_ADD_ACCOUNT_MODAL,
+	SET_WALLET,
+	SET_CONNECT_WALLET_MODAL,
 } from '../actions/account';
-import { ACCOUNTS_LIST_LS_FIELD, CHOSEN_ACCOUNT_LS_FIELD } from '/src/constants';
-import { generateRandomColor } from '/src/helpers';
+import { WALLET_LS_FIELD } from '/src/constants';
 
 const initialState = {
-	addAccountModal: null,
-	chosenAccountAddress: localStorage.getItem(CHOSEN_ACCOUNT_LS_FIELD) || null,
-	accountsList: JSON.parse(localStorage.getItem(ACCOUNTS_LIST_LS_FIELD)) || [],
+	connectWalletModal: null,
+	wallet: JSON.parse(localStorage.getItem(WALLET_LS_FIELD)) || null,
 }
   
 function reducer(state = initialState, action) {
 	const { type, payload } = action;
 
 	switch (type) {
-		case ADD_ACCOUNT: {
-			const color = generateRandomColor();
-			const accountData = {
-				...payload,
-				color: `#${color}`,
-			}
-			const accountsList = [...state.accountsList, accountData];
-			const chosenAccountAddress = payload.address;
-
-			localStorage.setItem(ACCOUNTS_LIST_LS_FIELD, JSON.stringify(accountsList));
-			localStorage.setItem(CHOSEN_ACCOUNT_LS_FIELD, chosenAccountAddress);
+		case SET_WALLET: {
+			if (payload)
+				localStorage.setItem(WALLET_LS_FIELD, JSON.stringify(payload));
+			else
+				localStorage.removeItem(WALLET_LS_FIELD);
 
 			return {
 				...state,
-				accountsList,
-				chosenAccountAddress,
+				wallet: payload,
 			}
 		}
 
-		case SELECT_ACCOUNT: {
-			localStorage.setItem(CHOSEN_ACCOUNT_LS_FIELD, payload);
-
+		case SET_CONNECT_WALLET_MODAL: {
 			return {
 				...state,
-				chosenAccountAddress: payload,
-			}
-		}
-
-		case REMOVE_ACCOUNT: {
-			const accountsList = state.accountsList.filter(account => account.address !== payload);
-			const isDeletingActiveAccount = state.chosenAccountAddress === payload;
-			const chosenAccountAddress = isDeletingActiveAccount ? accountsList[0] : state.chosenAccountAddress;
-
-			localStorage.setItem(ACCOUNTS_LIST_LS_FIELD, JSON.stringify(accountsList));
-			localStorage.setItem(CHOSEN_ACCOUNT_LS_FIELD, chosenAccountAddress);
-
-			return {
-				...state,
-				accountsList,
-				chosenAccountAddress,
-			}
-		}
-
-		case SET_ADD_ACCOUNT_MODAL: {
-			return {
-				...state,
-				addAccountModal: payload,
+				connectWalletModal: payload,
 			}
 		}
 

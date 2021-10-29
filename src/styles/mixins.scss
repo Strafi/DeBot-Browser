@@ -46,7 +46,7 @@
 	}
 }
 
-@mixin export-button-effects($background-color, $color) {
+@mixin light-button-effects($background-color, $color) {
 	transition: background-color .2s, color .2s;
 	cursor: pointer;
 
@@ -61,22 +61,36 @@
 	}
 }
 
-@mixin cancel-button-effects($color: $cancel-color) {
+@mixin bordered-button($color, $activeColor) {
+	color: $color;
+	border: 1px solid $color;
+	border-radius: 8px;
+	background-color: $activeColor;
+	cursor: pointer;
+	transition: color .2s, background-color .2s;
+
+	&:hover {
+		color: $activeColor;
+		background-color: $color;
+	}
+}
+
+@mixin cancel-button-effects($color: $cancel-color, $propery: 'stroke') {
 	cursor: pointer;
 
 	path {
-		transition: stroke .2s;
+		transition: #{$propery} .2s;
 	}
 
 	&:hover {
 		path {
-			stroke: darken($color, 15%);
+			#{$propery}: darken($color, 15%);
 		}
 	}
 
 	&:active {
 		path {
-			stroke: darken($color, 20%);
+			#{$propery}: darken($color, 20%);
 		}
 	}
 }

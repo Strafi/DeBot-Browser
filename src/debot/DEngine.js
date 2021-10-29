@@ -1,9 +1,12 @@
-import store from '/src/store';
 import { DebotModule } from '@tonclient/core';
+
+import store from '/src/store';
+import WalletService from '/src/WalletService';
 import tonClientController from '/src/tonClient';
 import { formDebotFunctionFromId } from '/src/helpers';
 import { COMPONENTS_BINDINGS, DEV_NETWORK, FLD_NETWORK } from '/src/constants';
 import { pushItemToStage, clearStage, setApproveWindow, setSigningBox } from '/src/store/actions/debot';
+import { setConnectWalletModal, setWallet } from '/src/store/actions/account';
 import DebotBrowser from './DebotBrowser';
 import InterfacesController from './interfaces';
 
@@ -36,7 +39,21 @@ class DEngine {
 		return initParams
 	}
 
+	async ensureWalletConnected() {
+		try {
+			if (!WalletService.isConnected) {
+				const connectedWallet = await WalletService.connect();
+				store.dispatch(setWallet(connectedWallet));
+			}
+		} catch (err) {
+			store.dispatch(setConnectWalletModal({ message: err.message, isError: true }));
+			await WalletService.waitForConnection();
+		}
+	}
+
 	async runDebot(address) {
+		await this.ensureWalletConnected();
+		
 		const initParams = await this.initDebot(address);
 
 		const { debot_handle, info: { interfaces } } = initParams;

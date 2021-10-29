@@ -38,7 +38,7 @@
 		background-color: $dark-green;
 		user-select: none;
 		
-		@include export-button-effects($dark-green, $white);
+		@include light-button-effects($dark-green, $white);
 	}
 
 	.stage-component__input {

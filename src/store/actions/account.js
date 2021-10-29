@@ -1,24 +1,12 @@
-export const ADD_ACCOUNT = 'account/ADD_ACCOUNT';
-export const SELECT_ACCOUNT = 'account/SELECT_ACCOUNT';
-export const REMOVE_ACCOUNT = 'account/REMOVE_ACCOUNT';
-export const SET_ADD_ACCOUNT_MODAL = 'account/SET_ADD_ACCOUNT_MODAL';
+export const SET_WALLET = 'account/SET_WALLET';
+export const SET_CONNECT_WALLET_MODAL = 'account/SET_CONNECT_WALLET_MODAL';
 
-export const addAccount = payload => ({
-	type: ADD_ACCOUNT,
+export const setWallet = payload => ({
+	type: SET_WALLET,
 	payload,
 })
 
-export const selectAccount = accountAddress => ({
-	type: SELECT_ACCOUNT,
-	payload: accountAddress,
-})
-
-export const removeAccount = accountAddress => ({
-	type: REMOVE_ACCOUNT,
-	payload: accountAddress,
-})
-
-export const setAddAccountModal = payload => ({
-	type: SET_ADD_ACCOUNT_MODAL,
+export const setConnectWalletModal = payload => ({
+	type: SET_CONNECT_WALLET_MODAL,
 	payload,
 })

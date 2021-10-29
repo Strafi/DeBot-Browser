@@ -1,10 +1,7 @@
-import CrystallWalletProvider, { hasTonProvider } from 'ton-inpage-provider';
-
 import store from '/src/store';
 import tonClientController from '/src/tonClient';
 import { encodeString } from '/src/helpers';
 import { DEBOT_WC } from '/src/constants';
-import { setAddAccountModal } from '/src/store/actions/account';
 import { USERINFO_ABI } from '../ABIs';
 import { DEngine } from '/src/debot';
 
@@ -16,67 +13,27 @@ class Userinfo {
 		this.abi = USERINFO_ABI;
 	}
 
-	async _getAccountData(debotAddress, interfaceAddress, answerId, isPubkey) {
-		if (!(await hasTonProvider())) {
-			throw new Error('Crystall Wallet is not installed')
-		}
-
-		await CrystallWalletProvider.ensureInitialized();
-
-		const { accountInteraction } = await CrystallWalletProvider.rawApi.requestPermissions({
-			permissions: ['tonClient', 'accountInteraction']
-		});
-
-		if (accountInteraction == null) {
-			throw new Error('Insufficient permissions')
-		}
-
-		console.log(accountInteraction);
-
-		const { accountsList, chosenAccountAddress } = store.getState().account;
-
-		if (!accountsList?.length) {
-			setAddAccountModal({
-				isVisible: true,
-				debotAddress,
-				functionId: answerId,
-				interfaceAddress,
-				isPubkey,
-			});
-
-			return null;
-		}
-
-		const chosenAccount = accountsList.find(account => account.address === chosenAccountAddress) || accountsList[0];
-
-		return chosenAccount;
-	} 
-
 	async getAccount(params) {
+		const { wallet } = store.getState().account;
 		const { value: { answerId }, debotAddress } = params;
 		const interfaceAddress = `${DEBOT_WC}:${this.id}`;
-		const accountData = await this._getAccountData(debotAddress, interfaceAddress, answerId);
 
-		if (accountData) {
-			try {
-				await DEngine.callDebotFunction(debotAddress, interfaceAddress, answerId, { value: accountData.address });
-			} catch(err) {
-				console.error(err.message);
-			}
+		try {
+			await DEngine.callDebotFunction(debotAddress, interfaceAddress, answerId, { value: wallet.address });
+		} catch(err) {
+			console.error(err.message);
 		}
 	}
 
 	async getPublicKey(params) {
+		const { wallet } = store.getState().account;
 		const { value: { answerId }, debotAddress } = params;
 		const interfaceAddress = `${DEBOT_WC}:${this.id}`;
-		const accountData = this._getAccountData(debotAddress, interfaceAddress, answerId, true);
 
-		if (accountData) {
-			try {
-				await DEngine.callDebotFunction(debotAddress, interfaceAddress, answerId, { value: encodeString(accountData.pubkey) });
-			} catch(err) {
-				console.error(err.message);
-			}
+		try {
+			await DEngine.callDebotFunction(debotAddress, interfaceAddress, answerId, { value: encodeString(wallet.publicKey) });
+		} catch(err) {
+			console.error(err.message);
 		}
 	}
 

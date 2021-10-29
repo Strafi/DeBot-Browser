@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+
+import WalletService from '/src/WalletService';
 import tonClientController from '/src/tonClient';
-import { BackIcon, MainNetIcon, DevNetIcon, FldNetIcon, NetworkIcon, CancelIcon } from '/src/components/icons';
+import { BackIcon, MainNetIcon, DevNetIcon, FldNetIcon, NetworkIcon, LogoutIcon } from '/src/components/icons';
 import { OptionsList } from '/src/components';
 import { MAIN_NETWORK, DEV_NETWORK, FLD_NETWORK } from '/src/constants';
-import { removeAccount, selectAccount, setAddAccountModal } from '/src/store/actions/account';
+import { setConnectWalletModal, setWallet } from '/src/store/actions/account';
+import { sliceAddress } from '/src/helpers';
 import SearchBar from '../SearchBar';
 import './index.scss';
 
@@ -13,8 +16,7 @@ const Header = () => {
 	const dispatch = useDispatch();
 	const [selectedNetwork, setSelectedNetwork] = useState(tonClientController.selectedNetwork);
 	const match = useRouteMatch('/debot');
-	const { chosenAccountAddress, accountsList } = useSelector(state => state.account);
-	const chosenAccount = accountsList.find(account => account.address === chosenAccountAddress) || accountsList[0];
+	const wallet = useSelector(state => state.account.wallet);
 
 	useEffect(() => {
 		setSelectedNetwork(tonClientController.selectedNetwork);
@@ -31,17 +33,26 @@ const Header = () => {
 		</div>
 	)
 
-	const handleSelectAccount = accountAddress => dispatch(selectAccount(accountAddress));
+	const handleAddAccount = async () => {
+		try {
+			dispatch(setConnectWalletModal({ isError: false }));
 
-	const handleRemoveAccount = accountAddress => dispatch(removeAccount(accountAddress));
+			const walletData = await WalletService.connect();
 
-	const handleAddAccount = () => dispatch(setAddAccountModal({ isVisible: true }));
+			dispatch(setWallet(walletData));
+			dispatch(setConnectWalletModal(null));
+		} catch(err) {
+			dispatch(setConnectWalletModal({ message: err.message, isError: true }));
+		}
+	};
 
-	const renderSelectedAccount = () => (
-		<div className='options-list__selected-item'>
-			<span className='selected-text-item'>{chosenAccount.label[0].toUpperCase()}</span>
-		</div>
-	)
+	const handleLogout = async () => {
+		try {
+			await WalletService.disconnect();
+		} catch (err) {
+			console.error(err);
+		}
+	};
 
 	const backButtonClassName = `header-container__back-button ${!match ? 'header-container__back-button--disabled' : ''}`
 
@@ -75,32 +86,16 @@ const Header = () => {
 						{FLD_NETWORK}
 					</div>
 				</OptionsList>
-				{accountsList?.length
-					? <OptionsList selectedItem={renderSelectedAccount()} height={'max-content'} width={200}>
-						{accountsList.map(account => {
-							return <div
-								className='options-list__list-item options-list__list-item--with-remove-icon'
-								onClick={() => handleSelectAccount(account.address)}
-								key={account.address}
-							>
-								{`${account.label} (${account.address.slice(0, 6)})`}
-								<div className='options-list__remove-item-icon'>
-									<CancelIcon onClick={e => { e.stopPropagation(); handleRemoveAccount(account.address); }} />
-								</div>
-							</div>
-						})}
-						<div
-							className='header-container__add-account-button'
-							onClick={handleAddAccount}
-						>
-							Add Account
-						</div>
-					</OptionsList>
+				{wallet
+					? <div className='header-container__account'>
+						<span>{sliceAddress(wallet.address)}</span>
+						<LogoutIcon width='22px' height='22px' onClick={handleLogout}/>
+					</div>
 					: <div
-						className='header-container__add-account-button'
+						className='header-container__connect-button'
 						onClick={handleAddAccount}
 					>
-						Add Account
+						Connect Wallet
 					</div>
 				}
 			</div>

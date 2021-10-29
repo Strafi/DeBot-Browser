@@ -48,15 +48,6 @@
 		}
 	}
 
-	&__address-explanation {
-		width: max-content;
-		margin-top: 20px;
-		font-size: 16px;
-		color: $light-blue;
-
-		@include link-effects($light-blue);
-	}
-
 	&__settings-bar {
 		display: flex;
 		align-items: center;
@@ -100,16 +91,11 @@
     			line-height: 22px;
 				font-weight: 600;
 			}
-
-			.header-container__add-account-button {
-				margin: 4px 0 8px;
-				text-align: center;
-			}
 		}
 	}
 
-	&__add-account-button {
-		margin-left: 8px;
+	&__connect-button {
+		margin-left: 12px;
 		font-weight: 600;
 		font-size: 16px;
 		color: $blue;
@@ -122,6 +108,22 @@
 
 		&:active {
 			color: $dark-blue;
+		}
+	}
+
+	&__account {
+		display: flex;
+		align-items: center;
+		margin-left: 12px;
+
+		span {
+			line-height: 21px;
+			font-weight: 600;
+			font-size: 16px;
+		}
+
+		.logout-icon {
+			@include cancel-button-effects($red, 'fill');
 		}
 	}
 }

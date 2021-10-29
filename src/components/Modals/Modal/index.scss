@@ -1,8 +1,7 @@
-@import '../../styles/colors.scss';
-@import '../../styles/size.scss';
-@import '../../styles/mixins.scss';
+@import '../../../styles/colors.scss';
+@import '../../../styles/mixins.scss';
 
-.add-account {
+.abstract-modal {
 	position: fixed;
 	z-index: 100;
 	left: 0;
@@ -13,21 +12,6 @@
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.66);
-
-	&__header {
-		width: 100%;
-		margin-bottom: 16px;
-		text-align: center;
-		font-size: 30px;
-		font-weight: 700;
-		color: $dark-black;
-	}
-
-	&__description {
-		margin-bottom: 20px;
-		font-size: 20px;
-		color: $dark-black;
-	}
 
 	&__container {
 		position: relative;
@@ -55,10 +39,6 @@
 		}
 	}
 
-	&__confirm {
-		margin-top: auto;
-	}
-
 	&__cancel-icon {
 		position: absolute;
 		top: 10px;
@@ -81,9 +61,5 @@
 				}
 			}
 		}
-	}
-
-	.with-margin-for-errors {
-		margin-bottom: 24px;
 	}
 }

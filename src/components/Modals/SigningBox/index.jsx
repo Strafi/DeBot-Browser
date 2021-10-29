@@ -86,7 +86,7 @@ const SigningBox = () => {
 					Signing Box
 				</div>
 				<div className='signing-box__description'>
-					We <b>DON'T</b> store your keys or seed phrase.
+					We <b>DON&apos;T</b> store your keys or seed phrase.
 				</div>
 				<div className='signing-box__input-container'>
 					<div className='signing-box__input-label'>Enter seed phrase:</div>

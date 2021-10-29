@@ -12,6 +12,7 @@ export { default as getEnvVariableFromInput } from './getEnvVariableFromInput';
 export { default as removeLocalDebot } from './removeLocalDebot';
 export { default as removeEnvVariable } from './removeEnvVariable';
 export { default as isCustomScrollBar } from './isCustomScrollBar';
+export { default as sliceAddress } from './sliceAddress';
 
 export { default as useSearchParams } from './hooks/useSearchParams';
 export { default as useDebotAddress } from './hooks/useDebotAddress';

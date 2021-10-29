@@ -7,3 +7,4 @@ export { default as DevNetIcon } from './DevNetIcon';
 export { default as MainNetIcon } from './MainNetIcon';
 export { default as FldNetIcon } from './FldNetIcon';
 export { default as NetworkIcon } from './NetworkIcon';
+export { default as LogoutIcon } from './LogoutIcon';
