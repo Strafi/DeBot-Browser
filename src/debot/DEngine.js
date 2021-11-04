@@ -31,6 +31,8 @@ class DEngine {
 	async initDebot(address) {
 		const debotBrowser = new DebotBrowser();
 
+		await debotBrowser.init();
+
 		const initParams = await this.debotModule.init({ address }, debotBrowser);
 
 		debotBrowser.setDebotParams(initParams);

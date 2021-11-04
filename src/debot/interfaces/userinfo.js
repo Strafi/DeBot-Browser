@@ -1,6 +1,5 @@
 import store from '/src/store';
 import tonClientController from '/src/tonClient';
-import { encodeString } from '/src/helpers';
 import { DEBOT_WC } from '/src/constants';
 import { USERINFO_ABI } from '../ABIs';
 import { DEngine } from '/src/debot';
@@ -31,7 +30,18 @@ class Userinfo {
 		const interfaceAddress = `${DEBOT_WC}:${this.id}`;
 
 		try {
-			await DEngine.callDebotFunction(debotAddress, interfaceAddress, answerId, { value: encodeString(wallet.publicKey) });
+			await DEngine.callDebotFunction(debotAddress, interfaceAddress, answerId, { value: `0x${wallet.publicKey}` });
+		} catch(err) {
+			console.error(err.message);
+		}
+	}
+
+	async getSigningBox(params) {
+		const { value: { answerId }, debotAddress, signingBoxHandle } = params;
+		const interfaceAddress = `${DEBOT_WC}:${this.id}`;
+
+		try {
+			await DEngine.callDebotFunction(debotAddress, interfaceAddress, answerId, { value: signingBoxHandle });
 		} catch(err) {
 			console.error(err.message);
 		}
@@ -58,6 +68,9 @@ class Userinfo {
 
 				case 'getPublicKey':
 					return this.getPublicKey(extendedParams);
+
+				case 'getSigningBox':
+					return this.getSigningBox(extendedParams);
 
 				default:
 					throw new Error(`Function does not exist on interface: ${this.constructor.name}`);

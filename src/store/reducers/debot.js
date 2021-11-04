@@ -15,6 +15,8 @@ const initialState = {
 	filterKey: '',
 	debotsList: [
 		{ title: 'DeNS', address: '0:c22300f9851e4fc9c246c3b605c521415407d95b272f0624a5e8f0d01ef25f27', network: MAIN_NETWORK },
+		{ title: 'Crystal Fever', address: '0:a7115bb9984210697943d409c7bbc77e1db6e2021bb38cb2ebc88d7fdfdf528c', network: MAIN_NETWORK },
+		{ title: 'Multisig', address: '0:c69a0ed4a11b467ec1a981f29139dc3ff6af47eeacd2cd93e67a6cfc6f771cfb', network: MAIN_NETWORK },
 	],
 	localDebotsList: JSON.parse(localStorage.getItem(USER_DEBOTS_LS_FIELD)) || [],
 }

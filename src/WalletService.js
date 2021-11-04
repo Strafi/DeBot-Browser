@@ -66,6 +66,12 @@ class WalletService {
 		return currentProviderState;
 	}
 
+	async sign(data, publicKey) {
+		const signed = await CrystallWalletProvider.rawApi.signData({ data, publicKey });
+
+		return signed;
+	}
+
 	async waitForConnection() {
 		const waitPromise = new Promise((res, rej) => {
 			this.responseToConnectionWaiter = res;

@@ -1,4 +1,5 @@
 import store from '/src/store';
+import WalletService from '/src/WalletService';
 import tonClientController from '/src/tonClient';
 import { DEngine } from '/src/debot';
 import { COMPONENTS_BINDINGS, DEBOT_WC } from '/src/constants';
@@ -13,6 +14,34 @@ class DebotBrowser {
 		this.info = null;
 		this.deprecatedMessageTimeout = null;
 		this.interfacesQueue = [];
+		this.signingBoxHandle = null;
+	}
+
+	async init() {
+		this.signingBoxHandle = await this._registerSigningBox();
+	}
+
+	async _registerSigningBox() {
+		const { publicKey } = store.getState().account.wallet;
+
+		const get_public_key = () => Promise.resolve({ public_key: publicKey });
+
+		const sign = async (params) => {
+			const { unsigned } = params;
+
+			const signResult = await WalletService.sign(unsigned, publicKey);
+
+			return { signature: signResult.signatureHex };
+		}
+
+		const signingBoxCreationObj = {
+			get_public_key,
+			sign,
+		}
+
+		const signingBoxRegistration = await tonClientController.client.crypto.register_signing_box(signingBoxCreationObj);
+
+		return signingBoxRegistration.handle;
 	}
 
 	setDebotParams(params) {
@@ -28,10 +57,11 @@ class DebotBrowser {
 
 		if (this.interfacesQueue.length) {
 			const interfaceState = this.interfacesQueue[0];
-			const { interfaceId, debotAddress, params } = interfaceState;
+			const { interfaceId, debotAddress, params, signingBoxHandle } = interfaceState;
 
 			InterfacesController.delegateToInterface(interfaceId, {
 				debotAddress,
+				signingBoxHandle,
 				...params,
 			});
 		}
@@ -85,7 +115,8 @@ class DebotBrowser {
 		this.showDeprecatedMessage();
 	}
 
-	async get_signing_box() {
+	// alternative version w\o extension
+	async get_default_signing_box() {
 		const keysPromise = new Promise((resolve) => {
 			store.dispatch(setSigningBox({
 				submit: resolve,
@@ -99,6 +130,10 @@ class DebotBrowser {
 		store.dispatch(setSigningBox(null));
 
 		return { signing_box: handle };
+	}
+
+	async get_signing_box() {
+		return { signing_box: this.signingBoxHandle };
 	}
 
 	invoke_debot() {
@@ -116,12 +151,14 @@ class DebotBrowser {
 				this.interfacesQueue.push({
 					interfaceId,
 					debotAddress: src,
+					signingBoxHandle: this.signingBoxHandle,
 					params,
 				})
 
 				if (this.interfacesQueue.length === 1) {
 					InterfacesController.delegateToInterface(interfaceId, {
 						debotAddress: src,
+						signingBoxHandle: this.signingBoxHandle,
 						...params,
 					});
 				}

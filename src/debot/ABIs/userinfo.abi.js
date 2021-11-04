@@ -19,7 +19,16 @@ const USERINFO_ABI = {
 			"outputs": [
 				{"name":"value","type":"uint256"}
 			]
-		}
+		},
+		{
+			"name": "getSigningBox",
+			"inputs": [
+				{"name":"answerId","type":"uint32"}
+			],
+			"outputs": [
+				{"name":"handle","type":"uint32"}
+			]
+		},
 	],
 	"data": [
 	],
