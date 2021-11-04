@@ -1,17 +1,17 @@
 import store from '/src/store';
-import tonClientController from '/src/tonClient';
 import { DEngine } from '/src/debot';
 import { decodeString, encodeString } from '/src/helpers';
 import { COMPONENTS_BINDINGS, DEBOT_WC } from '/src/constants';
 import { pushItemToStage } from '/src/store/actions/debot';
 import { MEDIA_ABI } from '../ABIs';
+import BaseInterface from './base';
 
 const ID = '59cdc2aafe53760937dac5b1c4b89ce12950f56a56298108a987cfe49b7c84b5';
 
-class Media {
+class Media extends BaseInterface {
 	constructor() {
-		this.id = ID;
-		this.abi = MEDIA_ABI;
+		super(ID, MEDIA_ABI);
+
 		this.mediaTypes = [
 			encodeString('image/png'),
 			encodeString('image/jpg'),
@@ -48,36 +48,6 @@ class Media {
 		};
 		
 		store.dispatch(pushItemToStage(stageObject));
-	}
-
-	async call(params) {
-		try {
-			const decodedMessage = await tonClientController.client.abi.decode_message({
-				abi: {
-					type: 'Contract',
-					value: this.abi,
-				},
-				message: params.message,
-			});
-
-			const extendedParams = {
-				...params,
-				...decodedMessage,
-			}
-
-			switch(decodedMessage.name) {
-				case 'getSupportedMediaTypes':
-					return this.getSupportedMediaTypes(extendedParams);
-
-				case 'output':
-					return this.output(extendedParams);
-
-				default:
-					throw new Error(`Function does not exist on interface: ${this.constructor.name}`);
-			}
-		} catch (err) {
-			console.error('Interface execution failed: ', err);
-		}
 	}
 }
 

@@ -8,6 +8,7 @@ import NumberInput from './number_input';
 import Echo from './echo';
 import Stdout from './stdout';
 import Userinfo from './userinfo';
+import SigningBoxInput from './signing_box_input';
 
 class InterfacesController {
 	constructor() {
@@ -21,6 +22,7 @@ class InterfacesController {
 		const stdout = new Stdout();
 		const userinfo = new Userinfo();
 		const media = new Media();
+		const signingBoxInput = new SigningBoxInput();
 
 		this.state = new Map([
 			[terminal.id, terminal],
@@ -33,6 +35,7 @@ class InterfacesController {
 			[echo.id, echo],
 			[stdout.id, stdout],
 			[userinfo.id, userinfo],
+			[signingBoxInput.id, signingBoxInput],
 		]);
 	}
 

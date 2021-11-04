@@ -1,15 +1,14 @@
 import store from '/src/store';
-import tonClientController from '/src/tonClient';
 import { DEBOT_WC } from '/src/constants';
 import { USERINFO_ABI } from '../ABIs';
 import { DEngine } from '/src/debot';
+import BaseInterface from './base';
 
 const ID = 'a56115147709ed3437efb89460b94a120b7fe94379c795d1ebb0435a847ee580';
 
-class Userinfo {
+class Userinfo extends BaseInterface {
 	constructor() {
-		this.id = ID;
-		this.abi = USERINFO_ABI;
+		super(ID, USERINFO_ABI);
 	}
 
 	async getAccount(params) {
@@ -44,39 +43,6 @@ class Userinfo {
 			await DEngine.callDebotFunction(debotAddress, interfaceAddress, answerId, { value: signingBoxHandle });
 		} catch(err) {
 			console.error(err.message);
-		}
-	}
-
-	async call(params) {
-		try {
-			const decodedMessage = await tonClientController.client.abi.decode_message({
-				abi: {
-					type: 'Contract',
-					value: this.abi,
-				},
-				message: params.message,
-			});
-
-			const extendedParams = {
-				...params,
-				...decodedMessage,
-			}
-
-			switch(decodedMessage.name) {
-				case 'getAccount':
-					return this.getAccount(extendedParams);
-
-				case 'getPublicKey':
-					return this.getPublicKey(extendedParams);
-
-				case 'getSigningBox':
-					return this.getSigningBox(extendedParams);
-
-				default:
-					throw new Error(`Function does not exist on interface: ${this.constructor.name}`);
-			}
-		} catch (err) {
-			console.error('Interface execution failed: ', err);
 		}
 	}
 }

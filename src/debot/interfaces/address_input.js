@@ -1,16 +1,15 @@
 import store from '/src/store';
-import tonClientController from '/src/tonClient';
 import { decodeString } from '/src/helpers';
 import { COMPONENTS_BINDINGS, DEBOT_WC } from '/src/constants';
 import { pushItemToStage } from '/src/store/actions/debot';
 import { ADDRESS_INPUT_ABI } from '../ABIs';
+import BaseInterface from './base';
 
 const ID = 'd7ed1bd8e6230871116f4522e58df0a93c5520c56f4ade23ef3d8919a984653b';
 
-class AddressInput {
+class AddressInput extends BaseInterface {
 	constructor() {
-		this.id = ID;
-		this.abi = ADDRESS_INPUT_ABI;
+		super(ID, ADDRESS_INPUT_ABI);
 	}
 
 	get(params) {
@@ -29,36 +28,6 @@ class AddressInput {
 
 	select(params) {
 		return this.get(params);
-	}
-
-	async call(params) {
-		try {
-			const decodedMessage = await tonClientController.client.abi.decode_message({
-				abi: {
-					type: 'Contract',
-					value: this.abi,
-				},
-				message: params.message,
-			});
-
-			const extendedParams = {
-				...params,
-				...decodedMessage,
-			}
-
-			switch(decodedMessage.name) {
-				case 'get':
-					return this.get(extendedParams);
-
-				case 'select':
-					return this.select(extendedParams);
-
-				default:
-					throw new Error(`Function does not exist on interface: ${this.constructor.name}`);
-			}
-		} catch (err) {
-			console.error('Interface execution failed: ', err);
-		}
 	}
 }
 
