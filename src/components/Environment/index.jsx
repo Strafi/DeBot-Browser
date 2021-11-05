@@ -93,7 +93,7 @@ const Environment = () => {
 			</div>
 			<div className='environment__input-container'>
 				<input
-					className='stage-component__input'
+					className='environment__input'
 					type='text'
 					placeholder='Key'
 					value={envKey}
@@ -101,7 +101,7 @@ const Environment = () => {
 				/>
 				<span className='environment__divider'>:</span>
 				<input
-					className='stage-component__input'
+					className='environment__input'
 					type='text'
 					placeholder='Value'
 					value={envValue}
