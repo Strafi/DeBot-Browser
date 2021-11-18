@@ -1,3 +1,8 @@
+# Everscale (ex. Free TON) DeBot Browser
+## DEPRECATED
+It is a v1 implementation which is not supported by the browser developers team anymore  
+v2 implementation of a browser that uses the [Debot Web Embedding package](https://www.npmjs.com/package/debot-web-embedding) [(source)](https://github.com/Strafi/debot-embedding) to show all debot-related logic is available here: https://github.com/Strafi/Free-TON-DeBot-Browser/tree/master
+
 ## How To Run
 If you don't want (or can not) to install the software mentioned below, you can access the pre-build DeBot browser by this link: https://freeton-stats.org/browser/.
 
