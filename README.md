@@ -1,6 +1,6 @@
 # Everscale DeBot Browser
 It is a v2 implementation of a browser that uses the [Debot Web Embedding package](https://www.npmjs.com/package/debot-web-embedding) [(source)](https://github.com/Strafi/debot-embedding) to show all debot-related logic  
-v1 imlementation is available here: https://github.com/Strafi/Free-TON-DeBot-Browser/tree/v1  
+v1 imlementation is available here: https://github.com/Strafi/DeBot-Browser/tree/v1  
 Note: v1 implementation is deprecated and therefore will be not supported by the browser developers team anymore
 
 ## How To Run
